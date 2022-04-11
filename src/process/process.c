@@ -27,11 +27,8 @@ Process* createProcess(char name, int pid, int start_time, int cycles, int wait,
   // 3: Finished
   process->state = -1;
   process->remaining_cycles = cycles;
-  // -1: None
   process->remaining_wait_time = waiting_delay;
-  // -1: None
   process->active_cycles_until_wait = wait;
-  // -1: None
   process->cycles_until_queue_reset = s;
   process->remaining_quantum = 0;
 
@@ -40,6 +37,9 @@ Process* createProcess(char name, int pid, int start_time, int cycles, int wait,
   process->turnaround_time = 0;
   process->response_time = 0;
   process->waiting_time = 0;
+  
+  process->next = NULL;
+  
   return process;
 }
 
@@ -85,7 +85,6 @@ Process* proc_tick(Process* process) {
 }
 
 Process* set_priority(Process* process, int priority) {
-  //TODO: ...
   return process;
 }
 
@@ -109,5 +108,3 @@ Process* sigstop(Process* process, bool is_waiting) {
   //  ¿?
   return process;
 }
-
-
