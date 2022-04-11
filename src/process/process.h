@@ -24,6 +24,8 @@ struct process {
   int active_cycles_until_wait;
   int cycles_until_queue_reset;
 
+  int remaining_quantum;
+
   int times_chosen;
   int times_interrupted;
   int turnaround_time;

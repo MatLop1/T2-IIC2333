@@ -18,7 +18,7 @@
 
 
 // Obtiene el quantum del proceso en base a la fórmula del enunciado
-int get_quantum(int q_value, int priority) {
+int get_queue_quantum(int q_value, int priority) {
   int quantum_val;
 
   quantum_val = q_value * priority;
@@ -36,7 +36,9 @@ void count_tick(Queue* queue1, Queue* queue2, Queue* queue3) {
 
 void run_fifo(int q, int priority,
               Queue* queue1, Queue* queue2, Queue* queue3) {
-  int quantum = q;
+  bool global_process_is_running;
+
+  if (global_process_is_running)
 
   if (quantum == 0) {
     quantum = get_quantum(q, priority);
@@ -47,16 +49,16 @@ void run_fifo(int q, int priority,
 
   //TODO: Asignar el tipo de variable al proceso
   if (priority == 2) {
-    Process *process = queue1->pop(0);
+    Process *process = pop(queue1, 0);
 
   } else {
-    Process *process = queue2->pop(0);
+    Process *process = pop(queue2, 0);
   }
 
   // Opera un tick en el struct de proceso.
   // Debe restar 1 a s, 1 a w y 1 a los ciclos restantes
   // Debe restarle 1 a los restantes para el prox wait
-  proc_tick(process);
+  proc_tick(*process);
   // Opera un tick en el struct de cola.
   // Debe restar 1 a todos los w y 1 a todos los s
   count_tick(queue1, queue2, queue3);
@@ -86,7 +88,7 @@ void run_fifo(int q, int priority,
 
 void run_sjf() {
   //Si no está corriendo lo reordena.
-  if ! (queue3[0].is_running) {
+  if ( ! queue3[0].is_running ) {
     queue3.sort();
   }
 

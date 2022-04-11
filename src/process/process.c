@@ -29,6 +29,7 @@ Process* createProcess(char name, int pid, int start_time, int cycles, int wait,
   process->active_cycles_until_wait = wait;
   // -1: None
   process->cycles_until_queue_reset = s;
+  process->remaining_quantum = 0;
 
   process->times_chosen = 0;
   process->times_interrupted = 0;
