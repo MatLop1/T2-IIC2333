@@ -31,30 +31,28 @@ int get_quantum(int q_value, int priority) {  //
   return quantum_val;
 }
 
+// Hace pasar un ciclo.
+// Retorna falso si no hay más programas en la cola
+//FIXME: Potencial bug: Si pasa
+bool tick(Queue queue1, Queue queue2, Queue queue3) {
+  load_programs()
 
-// Dice si quedan tareas pendientes en la lista.
-int remaining_tasks() {
-  //  https://www.tutorialspoint.com/cprogramming/c_arrays.htm
-  int i;
-  int **remaining_per_queue[3];
-  Queue **queues = {queue_1, queue_2, queue_3};
+  if (queue1.size > 0) {
+    run_fifo(queue1);
 
-  for ( i=0; i<3; i++ ) {
-    if ( queues[i].size > 0 )
+  } else if (queue2.size > 0) {
+    run_fifo(queue2);
+
+  } else if (queue3.size > 0) {
+    run_sjf(queue3);
+
+  } else {
+    return false;
   }
+  //  TODO: Marcar cuál es el que está corriendo
 
-  return 0;
+  return true;
 }
-
-  if (queue1.length == 0) || (queue1.length == 0)
-}
-
-
-void tick() {
-
-
-  return;
-};
 
 while procesos.existen()
 checkeo_listas()
