@@ -10,5 +10,5 @@ echo -e "\033[33;1mHaciendo ejecutable\033[0m"
 chmod +x ./crsh
 
 echo -e "\033[33;1mCorriendo con valgrind\033[0m"
-valgrind --leak-check=full -s ./crsh
+valgrind --leak-check=full -s ./mlfq
 echo -e "\033[33;1mFin\033[0m"
