@@ -4,7 +4,9 @@
 
 #include "process.h"
 
-Process* createProcess(char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s) {
+Process* createProcess(
+    char name, int pid, int start_time, int cycles,
+    int wait, int waiting_delay, int s) {
   Process* process = malloc (sizeof(Process));
   process->name = name;
   process->pid = pid;
@@ -85,6 +87,7 @@ Process* proc_tick(Process* process) {
 }
 
 Process* set_priority(Process* process, int priority) {
+  // TODO: Pendiente reasignar valor del atributo
   return process;
 }
 
