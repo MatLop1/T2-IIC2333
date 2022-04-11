@@ -1,3 +1,5 @@
+!.gitignore
+
 # Prerequisites
 *.d
 
@@ -29,24 +31,61 @@
 *.dylib
 
 # Executables
-*.exe
+#*.exe
 *.out
-*.app
+#*.app
 *.i*86
 *.x86_64
 *.hex
+#*.bin
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+# Archivos random
+*.tmp
+*.temp
+*.old
+*.sav
+*.bak
+*.bk
+.directory
+.hidden
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# Pruebas
+**/tests/
+**/tests/*
+tests/
+tests/*
+
+# Cosa compilador
+obj/
+obj/*
+core/
+core/*
+core
+vgcore.*
+
+# IDE/Editores
+.idea/
+.idea/*
+.code/
+.code/*
+*.code
+.vscode/
+*.vscode
+.vscode/*
+*.kate-swp
+*.save
+*.swp
+cmake-build-debug/
+cmake-build-debug/*
+
+# Binarios
+#/crsh
+#/helloworld
+#/bash
+#/good_night
+
+# Otros
+/CMakeLists.txt
+*.zip
+*.tar.gz
+*.rar
