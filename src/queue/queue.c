@@ -34,5 +34,21 @@ Queue* wait_tick_queue(Queue* queue) {
   // TODO:
   //  for process in queue:
   //      proc_tick(process)
-  return queue
+  return queue;
 }
+
+Queue* pop(Queue* queue, int pos) {
+  // 0 por defecto --> Saca el primero
+  // TODO
+  return queue;
+}
+
+Queue* push(Queue* queue, int pos) {
+  // -1 por defecto --> Lo pone al final
+  // TODO
+  return queue;
+}
+
+
+
+
