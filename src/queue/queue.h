@@ -22,3 +22,5 @@ void enqueue(Queue* queue,
              int s);
 
 Process* dequeue(Queue* queue);
+
+Queue* wait_tick_queue(Queue* queue);
