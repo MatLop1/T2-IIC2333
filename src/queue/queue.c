@@ -1,3 +1,7 @@
+// T02 IIC2333
+// Matías López    y    Luis González
+// Nro. 17210674        Nro. 16625439
+
 #include <stdlib.h>
 #include "queue.h"
 

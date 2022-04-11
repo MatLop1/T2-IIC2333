@@ -1,6 +1,6 @@
 // T02 IIC2333
 // Matías López    y    Luis González
-// Nro. ########        Nro. 16625439
+// Nro. 17210674        Nro. 16625439
 
 //Para printear
 #include <stdio.h>

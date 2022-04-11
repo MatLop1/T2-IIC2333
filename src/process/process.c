@@ -1,3 +1,7 @@
+// T02 IIC2333
+// Matías López    y    Luis González
+// Nro. 17210674        Nro. 16625439
+
 #include "process.h"
 
 Process* createProcess(char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s) {
