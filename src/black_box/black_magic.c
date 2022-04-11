@@ -48,24 +48,34 @@ void run_fifo(int q, int priority,
     Process *process = queue2.pop(0);
   }
 
-  // Opera un tick
+  // Opera un tick en el struct de proceso.
+  // Debe restar 1 a s, 1 a w y 1 a los ciclos restantes
+  // Debe restarle 1 a los restantes para el prox wait
   process.do_stuff();
+  // Opera un tick en el struct de cola.
+  // Debe restar 1 a todos los w y 1 a todos los s
+  queue1.wait_tick();
 
   // TODO: Revisar que funcione bien al integrar el código
   if (process.is_finished == true) {
     continue;
 
+  } else if (process.s <= 0) {
+    process.reset_s();
+    process.priority = 2;
+    queue1.push(*process)
+
   } else if (priority == 2){
     process.priority = 1;
-
-    if process.s
+    queue2.push(*process)
 
   } else if (priority == 1) {
     process.priority = 0;
+    queue3.push(*process)
   }
-
-
 }
+
+
 
 // Hace pasar un ciclo.
 // Retorna falso si no hay más programas en la cola
