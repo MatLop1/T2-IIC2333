@@ -1,5 +1,6 @@
 #include "process.h"
 #include <stdlib.h>
+#include <stdbool.h>
 
 // FIXME: IMPORTANTE: La cosa marca que '->' es 'Incomplete definition of struct process' para cada atributo.
 // FIXME: Marca error con 'char[32] name'. Lleva a un cierre de paréntesis implícito y muere.

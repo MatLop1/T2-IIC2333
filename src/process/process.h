@@ -4,7 +4,7 @@ struct process;
 typedef struct process Process;
 
 struct process {
-  char[32] name
+  char name;
   int pid;
   int start_time;
   int cycles;
@@ -25,3 +25,4 @@ struct process {
 };
  
 Process* createProcess(char[32] name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s);
+Process* proc_tick(Process* process);
