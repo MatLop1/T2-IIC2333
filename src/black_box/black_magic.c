@@ -23,7 +23,7 @@
 
 
 // Obtiene el quantum del proceso en base a la fórmula del enunciado
-int get_quantum(int q_value, int priority) {  //
+int get_quantum(int q_value, int priority) {
   int quantum_val;
 
   quantum_val = q_value * priority;
@@ -31,11 +31,16 @@ int get_quantum(int q_value, int priority) {  //
   return quantum_val;
 }
 
-void run_fifo(int q, int priority, Queue queue1, Queue queue2, Queue queue3) {
-  int quantum = get_quantum(q, priority)
-  //TODO: guardar quantum restante en "algún" lugar
+void run_fifo(int q, int priority,
+              Queue queue1, Queue queue2, Queue queue3) {
+  if (quantum == 0) {
+    quantum = get_quantum(q, priority)
+  }
 
-  // TODO: Asignar el tipo de variable al proceso
+  //TODO: guardar quantum restante en "algún" lugar
+  quantum = quantum - 1
+
+  //TODO: Asignar el tipo de variable al proceso
   if (priority == 2) {
     Process *process = queue1.pop(0);
 
@@ -43,7 +48,21 @@ void run_fifo(int q, int priority, Queue queue1, Queue queue2, Queue queue3) {
     Process *process = queue2.pop(0);
   }
 
-  process.do_stuff()
+  // Opera un tick
+  process.do_stuff();
+
+  // TODO: Revisar que funcione bien al integrar el código
+  if (process.is_finished == true) {
+    continue;
+
+  } else if (priority == 2){
+    process.priority = 1;
+
+    if process.s
+
+  } else if (priority == 1) {
+    process.priority = 0;
+  }
 
 
 }
@@ -54,6 +73,10 @@ void run_fifo(int q, int priority, Queue queue1, Queue queue2, Queue queue3) {
 // a llegar programas, entonces va a marcar como que terminó.
 bool tick(int q, Queue queue1, Queue queue2, Queue queue3) {
   load_programs()
+
+  // TODO: Variable común??
+  // TODO: guardar cuenta de ciclos en "algún" lugar
+  ciclos ++
 
   if (queue1.size > 0) {
     run_fifo(int q, 2, queue1, queue2, queue3);
