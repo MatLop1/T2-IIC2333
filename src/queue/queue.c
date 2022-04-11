@@ -26,7 +26,7 @@ void enqueue(Queue* queue, Process* process)
 Process* dequeue_fifo(Queue* queue) {
     Process* tmp1 = queue->front;
     Process* tmp2 = queue->front;
-    while (tmp2 & tmp2->state==2){
+    while (tmp2 && tmp2->state==2){
         if (tmp1->pid == tmp2->pid){
             tmp2 = tmp2->next;
         } else {
@@ -44,22 +44,20 @@ Process* dequeue_fifo(Queue* queue) {
 Process* dequeue_sfj(Queue* queue) {
     Process* sfj = queue->front;
     
-    while (sfj & sfj->state==2){
+    while (sfj && sfj->state==2){
         sfj = sfj->next;
     }
     
     Process* tmp1 = sfj;
-    Process* tmp2 = sfj;
     Process* tmp3 = sfj;
     Process* tmp4 = sfj;
 
-    while (tmp4 & sfj){
+    while (tmp4 && sfj){
         if (tmp4->pid == tmp3->pid){
             tmp4 = tmp4->next;
         } else {
             if (tmp4->remaining_cycles < sfj->remaining_cycles & tmp4->state==1){
                 tmp1 = tmp3;
-                tmp2 = tmp4;
                 sfj = tmp4
             }
             tmp3 = tmp3->next;
@@ -67,15 +65,17 @@ Process* dequeue_sfj(Queue* queue) {
         }
     }
     if (sfj){
-        tmp1->next = tmp2->next;
+        tmp1->next = sfj->next;
         queue->size--;
     }
     return sfj;
 }
 
 Queue* wait_tick_queue(Queue* queue) {
-  // TODO:
-  //  for process in queue:
-  //      proc_tick(process)
-  return queue
+    Process* process = queue->front;
+    while(process){
+        proc_tick(process);
+        process = process->next;
+    }
+    return queue;
 }
