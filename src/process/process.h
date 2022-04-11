@@ -1,5 +1,8 @@
 #pragma once
 
+#include <stdlib.h>
+#include <stdbool.h>
+
 struct process;
 typedef struct process Process;
 
@@ -29,7 +32,13 @@ struct process {
 
   Process* next;
 };
- 
+
+Process* end_process(Process* process);
 Process* createProcess(char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s);
 Process* proc_tick(Process* process);
 Process* set_priority(Process* process, int priority);
+Process* start_first_time(Process* process);
+
+Process* sigcont(Process* process);
+Process* sigstop(Process* process, bool is_waiting);
+

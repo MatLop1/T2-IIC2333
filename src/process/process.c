@@ -1,6 +1,4 @@
 #include "process.h"
-#include <stdlib.h>
-#include <stdbool.h>
 
 Process* createProcess(char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s) {
   Process* process = malloc (sizeof(Process));
