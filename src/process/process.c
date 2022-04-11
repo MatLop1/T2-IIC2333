@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// FIXME: IMPORTANTE: La cosa marca que '->' es 'Incomplete definition of struct process' para cada atributo.
 Process* createProcess(char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s) {
   Process* process = malloc (sizeof(Process));
   process->name = name;
@@ -35,6 +34,9 @@ Process* createProcess(char name, int pid, int start_time, int cycles, int wait,
   process->turnaround_time = 0;
   process->response_time = 0;
   process->waiting_time = 0;
+  
+  process->next = NULL;
+  
   return process;
 }
 
@@ -103,14 +105,3 @@ Process* sigstop(Process* process, bool is_waiting) {
   //  ¿?
   return process;
 }
-
-void end_process(Process* process) {
-  process->state = 3;
-  process->remaining_cycles = 0;
-  process->remaining_wait_time = -1;
-  process->active_cycles_until_wait = -1;
-  process->cycles_until_queue_reset = -1;
-  return process;
-}
-
-

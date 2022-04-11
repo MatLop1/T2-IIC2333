@@ -10,9 +10,9 @@ Queue* createQueue()
     return queue;
 }
 
-void enqueue(Queue* queue, char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s)
+void enqueue(Queue* queue, Process* process)
 {
-    Process* tmp = createProcess(name, pid, start_time, cycles, wait, waiting_delay, s);
+    Process* tmp = process;
     if(!queue->front){
         queue->rear->next = tmp;
         queue->rear = tmp;
@@ -23,11 +23,54 @@ void enqueue(Queue* queue, char name, int pid, int start_time, int cycles, int w
     queue->size++;
 }
 
-Process* dequeue(Queue* queue) {
-    Process* tmp = queue->front;
-    queue->front = queue->front->next;
-    queue->size--;
-    return tmp;
+Process* dequeue_fifo(Queue* queue) {
+    Process* tmp1 = queue->front;
+    Process* tmp2 = queue->front;
+    while (tmp2 & tmp2->state==2){
+        if (tmp1->pid == tmp2->pid){
+            tmp2 = tmp2->next;
+        } else {
+            tmp1 = tmp1->next;
+            tmp2 = tmp2->next;
+        }
+    }
+    if (tmp2){
+        tmp1->next = tmp2->next;
+        queue->size--;
+    }
+    return tmp2;
+}
+
+Process* dequeue_sfj(Queue* queue) {
+    Process* sfj = queue->front;
+    
+    while (sfj & sfj->state==2){
+        sfj = sfj->next;
+    }
+    
+    Process* tmp1 = sfj;
+    Process* tmp2 = sfj;
+    Process* tmp3 = sfj;
+    Process* tmp4 = sfj;
+
+    while (tmp4 & sfj){
+        if (tmp4->pid == tmp3->pid){
+            tmp4 = tmp4->next;
+        } else {
+            if (tmp4->remaining_cycles < sfj->remaining_cycles & tmp4->state==1){
+                tmp1 = tmp3;
+                tmp2 = tmp4;
+                sfj = tmp4
+            }
+            tmp3 = tmp3->next;
+            tmp4 = tmp4->next;
+        }
+    }
+    if (sfj){
+        tmp1->next = tmp2->next;
+        queue->size--;
+    }
+    return sfj;
 }
 
 Queue* wait_tick_queue(Queue* queue) {
