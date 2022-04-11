@@ -15,6 +15,12 @@
 
 #include "black_magic.h"
 
+//Colas:
+#include "../queue/queue.h"
+//#include "../queue/queue_1.h"
+//#include "../queue/queue_2.h"
+//#include "../queue/queue_3.h"
+
 int get_quantum(int q_value, int priority) {  //
   int quantum_val;
 
