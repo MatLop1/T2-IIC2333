@@ -31,6 +31,14 @@ int get_quantum(int q_value, int priority) {
   return quantum_val;
 }
 
+void wait_tick(Queue queue1, Queue queue2, Queue queue3) {
+  queue1.wait_tick();
+  queue2.wait_tick();
+  queue3.wait_tick();
+
+  return;
+}
+
 void run_fifo(int q, int priority,
               Queue queue1, Queue queue2, Queue queue3) {
   if (quantum == 0) {
@@ -54,7 +62,7 @@ void run_fifo(int q, int priority,
   process.do_stuff();
   // Opera un tick en el struct de cola.
   // Debe restar 1 a todos los w y 1 a todos los s
-  queue1.wait_tick();
+  wait_tick(queue1, queue2, queue3);
 
   // TODO: Revisar que funcione bien al integrar el código
   if (process.is_finished == true) {
@@ -64,15 +72,15 @@ void run_fifo(int q, int priority,
   } else if (process.s <= 0) {
     process.reset_s();
     process.priority = 2;
-    queue1.push(*process);
+    queue1.push(*process, -1);
 
   } else if (priority == 2){
     process.priority = 1;
-    queue2.push(*process);
+    queue2.push(*process, -1);
 
   } else if (priority == 1) {
     process.priority = 0;
-    queue3.push(*process);
+    queue3.push(*process, 0);
   }
 
   return;
@@ -80,7 +88,39 @@ void run_fifo(int q, int priority,
 
 
 void run_sjf() {
+  //Si no está corriendo lo reordena.
+  if ! (queue3[0].is_running) {
+    queue3.sort();
+  }
 
+  // Opera un tick en el struct de proceso.
+  // Debe restar 1 a s, 1 a w y 1 a los ciclos restantes
+  // Debe restarle 1 a los restantes para el prox wait
+  process.do_stuff();
+  // Opera un tick en el struct de cola.
+  // Debe restar 1 a todos los w y 1 a todos los s
+  wait_tick(queue1, queue2, queue3);
+
+  // TODO: Revisar que funcione bien al integrar el código
+  if (process.is_finished == true) {
+    // TODO:push a lista de procesos terminados. Crear lista.
+    finished.push(*process);
+
+  } else if (process.s <= 0) {
+    process.reset_s();
+
+    process.set_ready();
+    process.unset_running();
+
+    process.priority = 2;
+    queue1.push(*process, -1);
+
+  } else if (priority == 1) {
+    process.priority = 0;
+    queue3.push(*process, 0);
+  }
+
+  return;
 }
 
 
@@ -90,7 +130,6 @@ void run_sjf() {
 // a llegar programas, entonces va a marcar como que terminó.
 bool tick(int q, Queue queue1, Queue queue2, Queue queue3) {
   load_programs();
-  queue3.sort();
 
   // TODO: Variable común??
   // TODO: guardar cuenta de ciclos en "algún" lugar
