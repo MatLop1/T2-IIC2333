@@ -1,9 +1,10 @@
 #include "process.h"
+#include <stdlib.h>
 
 Process* createProcess(
     char[32] name, int pid, int start_time,
     int cycles, int wait, int waiting_delay, int s) {
-  struct Process* process = (Process*)malloc(sizeof(Process));
+  struct Process* process = (Process*) malloc (sizeof(Process));
   process->name = name;
   process->pid = pid;
   process->start_time = start_time;
@@ -40,26 +41,35 @@ Process* createProcess(
   return process;
 }
 
+Process* end_process(Process* process) {
+  process->state = 3;
+  process->remaining_cycles = 0;
+  process->remaining_wait_time = -1;
+  process->active_cycles_until_wait = -1;
+  process->cycles_until_queue_reset = -1;
+  return process;
+}
+
 Process* proc_tick(Process* process) {
   // TODO: Sumar valores al resumen
-  if (process.state == 0) {  // Running
+  if (process->state == 0) {  // Running
     process->remaining_cycles -= 1;
     process->active_cycles_until_wait -= 1;
 
-  } else if (process.state == 2) {  // Waiting
-    process->remaining_wait_time -= 1
+  } else if (process->state == 2) {  // Waiting
+    process->remaining_wait_time -= 1;
 
-  } else if (process.state == -1) { // None
+  } else if (process->state == -1) { // None
     process->cycles_until_start -= 1;
   }
 
-  process->cycles_until_queue_reset -= 1
+  process->cycles_until_queue_reset -= 1;
 
-  if (process.remaining_cycles == 0) {
-    end_process(*process)
+  if (process->remaining_cycles == 0) {
+    end_process(*process);
 
   } else {
-    if (process.state != -1) {
+    if (process->state != -1) {
       process->cycles_until_queue_reset -= 1;
 
     } else {
@@ -79,7 +89,7 @@ Process* set_priority(Process* process, int priority) {
 
 Process* start_first_time(Process* process) {
   process->state = 1;
-  process-set_priority(*process, 2)
+  process-set_priority(*process, 2);
   return process;
 }
 
@@ -90,20 +100,11 @@ Process* sigcont(Process* process) {
   return process;
 }
 
-Process* sigstop(Process* process, bool wa) {
+Process* sigstop(Process* process, bool is_waiting) {
   // TODO:
   //  process.times_interrupted ++
   //  process.state = 2 if (is_waiting) else 1
   //  ¿?
-  return process;
-}
-
-Process* end_process(Process* process) {
-  process->state = 3;
-  process->remaining_cycles = 0;
-  process->remaining_wait_time = -1;
-  process->active_cycles_until_wait = -1;
-  process->cycles_until_queue_reset = -1;
   return process;
 }
 
