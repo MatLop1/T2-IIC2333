@@ -1,8 +1,29 @@
-#include <stdio.h>	// FILE, fopen, fclose, etc.
-#include <stdlib.h> // malloc, calloc, free, etc
+//Para printear
+// FILE, fopen, fclose, etc.
+#include <stdio.h>
+//Para comparar strings
+#include <string.h>
+//Para booleanos
+#include <stdbool.h>
+//Uso de memoria/heap
+// malloc, calloc, free, etc
+#include <stdlib.h>
+//Para concatenar strings
+#include <string.h>
+//Para poder hacer fork
+#include <unistd.h>
+
+// Traigo módulos que venían
 #include "../process/process.h"
 #include "../queue/queue.h"
 #include "../file_manager/manager.h"
+
+//Módulos de la tarea pasada
+// Para debuguear
+# include "debug/debug.h"
+// Mensajes de error
+# include "errors/errors.h"
+
 
 int main(int argc, char const *argv[])
 {
