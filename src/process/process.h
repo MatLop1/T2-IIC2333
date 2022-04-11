@@ -1,1 +1,27 @@
 #pragma once
+
+struct process;
+typedef struct process Process;
+
+struct process {
+  char[32] name
+  int pid;
+  int start_time;
+  int cycles;
+  int wait;
+  int waiting_delay;
+  int s;
+
+  int priority;
+  int state;
+
+  int times_chosen;
+  int times_interrupted;
+  int turnaround_time;
+  int response_time;
+  int waiting_time;
+
+  Process* next;
+};
+ 
+Process* createProcess(char[32] name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s);
