@@ -37,16 +37,15 @@ Queue* wait_tick_queue(Queue* queue) {
   return queue;
 }
 
-Queue* pop(Queue* queue, int pos) {
+Process* pop(Queue* queue, int pos) {
   // 0 por defecto --> Saca el primero
   // TODO
-  return queue;
+  return process;
 }
 
-Queue* push(Queue* queue, int pos) {
+void push(Queue* queue, int pos) {
   // -1 por defecto --> Lo pone al final
   // TODO
-  return queue;
 }
 
 

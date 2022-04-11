@@ -24,5 +24,5 @@ void enqueue(Queue* queue,
 Process* dequeue(Queue* queue);
 
 Queue* wait_tick_queue(Queue* queue);
-Queue* pop(Queue* queue, int pos);
-Queue* push(Queue* queue, int pos);
+Process* pop(Queue* queue, int pos);
+void push(Queue* queue, int pos);
