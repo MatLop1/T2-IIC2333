@@ -16,11 +16,6 @@
 //A sí mismo
 #include "scheduler.h"
 
-//Colas:
-#include "../queue/queue.h"
-//Procesos
-#include "../process/process.h"
-
 
 // Obtiene el quantum del proceso en base a la fórmula del enunciado
 int get_quantum(int q_value, int priority) {
@@ -61,7 +56,7 @@ void run_fifo(int q, int priority,
   // Opera un tick en el struct de proceso.
   // Debe restar 1 a s, 1 a w y 1 a los ciclos restantes
   // Debe restarle 1 a los restantes para el prox wait
-  process->proc_tick(process);
+  proc_tick(process);
   // Opera un tick en el struct de cola.
   // Debe restar 1 a todos los w y 1 a todos los s
   count_tick(queue1, queue2, queue3);
