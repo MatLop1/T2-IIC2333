@@ -1,5 +1,5 @@
 #pragma once
-#include "process.h"
+#include "../process/process.h"
 
 struct queue;
 typedef struct queue Queue;

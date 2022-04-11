@@ -4,7 +4,7 @@ struct process;
 typedef struct process Process;
 
 struct process {
-  char[32] name
+  char[32] name;
   int pid;
   int start_time;
   int cycles;

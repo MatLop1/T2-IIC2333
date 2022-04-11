@@ -25,11 +25,8 @@ Process* createProcess(
   // 3: Finished
   process->state = -1;
   process->remaining_cycles = cycles;
-  // -1: None
   process->remaining_wait_time = waiting_delay;
-  // -1: None
   process->active_cycles_until_wait = wait;
-  // -1: None
   process->cycles_until_queue_reset = s;
 
   process->times_chosen = 0;
@@ -41,23 +38,21 @@ Process* createProcess(
 }
 
 Process* proc_tick(Process* process) {
-  // TODO: Sumar valores al resumen
   if (process.state == 0) {  // Running
     process->remaining_cycles -= 1;
     process->active_cycles_until_wait -= 1;
 
   } else if (process.state == 2) {  // Waiting
-    process->remaining_wait_time -= 1
+    process->remaining_wait_time -= 1;
 
   } else if (process.state == -1) { // None
     process->cycles_until_start -= 1;
   }
 
-  process->cycles_until_queue_reset -= 1
+  process->cycles_until_queue_reset -= 1;
 
-  if (process.remaining_cycles == 0) {
+  if (process.remaining_cycles == 0) { // No quedan ciclos pendientes
     end_process(*process)
-
   } else {
     if (process.state != -1) {
       process->cycles_until_queue_reset -= 1;
@@ -73,13 +68,12 @@ Process* proc_tick(Process* process) {
 }
 
 Process* set_priority(Process* process, int priority) {
-  //TODO: ...
   return process;
 }
 
 Process* start_first_time(Process* process) {
   process->state = 1;
-  process-set_priority(*process, 2)
+  process.set_priority(*process, 2);
   return process;
 }
 
@@ -98,7 +92,7 @@ Process* sigstop(Process* process, bool wa) {
   return process;
 }
 
-Process* end_process(Process* process) {
+void end_process(Process* process) {
   process->state = 3;
   process->remaining_cycles = 0;
   process->remaining_wait_time = -1;

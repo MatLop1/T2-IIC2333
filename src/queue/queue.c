@@ -3,7 +3,7 @@
 Queue* createQueue()
 {
     Queue* queue = (Queue*)malloc(sizeof(Queue));
-    queue->size = 0
+    queue->size = 0;
     queue->front = NULL;
     queue->rear = NULL;
     return queue;
