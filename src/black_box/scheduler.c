@@ -51,7 +51,9 @@ void run_fifo(int q, int priority,
   int global_remaining_quantum;
 
   // Si hay un proceso corriendo, lo obtengo
-  if (global_process_is_running)
+  if (global_process_is_running) {
+
+  }
 
   if (quantum == 0) {
     quantum = get_quantum(q, priority);
