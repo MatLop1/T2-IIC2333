@@ -1,15 +1,16 @@
+#include <stdlib.h>
 #include "queue.h"
 
 Queue* createQueue()
 {
-    Queue* queue = (Queue*)malloc(sizeof(Queue));
-    queue->size = 0
+    Queue* queue = malloc(sizeof(Queue));
+    queue->size = 0;
     queue->front = NULL;
     queue->rear = NULL;
     return queue;
 }
 
-void enqueue(Queue* queue, char[32] name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s)
+void enqueue(Queue* queue, char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s)
 {
     Process* tmp = createProcess(name, pid, start_time, cycles, wait, waiting_delay, s);
     if(!queue->front){

@@ -15,6 +15,12 @@ struct process {
   int priority;
   int state;
 
+  int cycles_until_start;
+  int remaining_cycles;
+  int remaining_wait_time;
+  int active_cycles_until_wait;
+  int cycles_until_queue_reset;
+
   int times_chosen;
   int times_interrupted;
   int turnaround_time;
@@ -26,3 +32,4 @@ struct process {
  
 Process* createProcess(char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s);
 Process* proc_tick(Process* process);
+Process* set_priority(Process* process, int priority);

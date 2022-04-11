@@ -2,78 +2,78 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// FIXME: IMPORTANTE: La cosa marca que '.' es 'Incomplete definition of struct process' para cada atributo.
+// FIXME: IMPORTANTE: La cosa marca que '->' es 'Incomplete definition of struct process' para cada atributo.
 Process* createProcess(char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s) {
-  struct Process* process = (Process*) malloc (sizeof(Process));
-  process.name = name;
-  process.pid = pid;
-  process.start_time = start_time;
-  process.cycles = cycles;
-  process.wait = wait;
-  process.waiting_delay = waiting_delay;
-  process.s = s;
+  Process* process = malloc (sizeof(Process));
+  process->name = name;
+  process->pid = pid;
+  process->start_time = start_time;
+  process->cycles = cycles;
+  process->wait = wait;
+  process->waiting_delay = waiting_delay;
+  process->s = s;
 
-  process.cycles_until_start = start_time;
+  process->cycles_until_start = start_time;
   // -1: None
   // 0: Cola 3
   // 1: Cola 2
   // 2: Cola 1
-  process.priority = -1;
+  process->priority = -1;
   // -1: None
   // 0: Running
   // 1: Ready
   // 2: Wait
   // 3: Finished
-  process.state = -1;
-  process.remaining_cycles = cycles;
+  process->state = -1;
+  process->remaining_cycles = cycles;
   // -1: None
-  process.remaining_wait_time = waiting_delay;
+  process->remaining_wait_time = waiting_delay;
   // -1: None
-  process.active_cycles_until_wait = wait;
+  process->active_cycles_until_wait = wait;
   // -1: None
-  process.cycles_until_queue_reset = s;
+  process->cycles_until_queue_reset = s;
 
-  process.times_chosen = 0;
-  process.times_interrupted = 0;
-  process.turnaround_time = 0;
-  process.response_time = 0;
-  process.waiting_time = 0;
+  process->times_chosen = 0;
+  process->times_interrupted = 0;
+  process->turnaround_time = 0;
+  process->response_time = 0;
+  process->waiting_time = 0;
   return process;
 }
 
 Process* end_process(Process* process) {
-  process.state = 3;
-  process.remaining_cycles = 0;
-  process.remaining_wait_time = -1;
-  process.active_cycles_until_wait = -1;
-  process.cycles_until_queue_reset = -1;
+  process->state = 3;
+  process->remaining_cycles = 0;
+  process->remaining_wait_time = -1;
+  process->active_cycles_until_wait = -1;
+  process->cycles_until_queue_reset = -1;
   return process;
 }
 
 Process* proc_tick(Process* process) {
   // TODO: Sumar valores al resumen
-  if (process.state == 0) {  // Running
-    process.remaining_cycles -= 1;
-    process.active_cycles_until_wait -= 1;
+  if (process->state == 0) {  // Running
+    process->remaining_cycles -= 1;
+    process->active_cycles_until_wait -= 1;
 
-  } else if (process.state == 2) {  // Waiting
-    process.remaining_wait_time -= 1;
+  } else if (process->state == 2) {  // Waiting
+    process->remaining_wait_time -= 1;
 
-  } else if (process.state == -1) { // None
-    process.cycles_until_start -= 1;
+  } else if (process->state == -1) { // None
+    process->cycles_until_start -= 1;
   }
 
-  process.cycles_until_queue_reset -= 1;
+  process->cycles_until_queue_reset -= 1;
 
-  if (process.remaining_cycles == 0) {
+  if (process->remaining_cycles == 0) {
     end_process(process);
 
   } else {
-    if (process.state != -1) {
-      process.cycles_until_queue_reset -= 1;
+    if (process->state != -1) {
+      process->cycles_until_queue_reset -= 1;
 
     } else {
-      process.cycles_until_start -= 1;
+      process->cycles_until_start -= 1;
     }
   }
 
@@ -88,8 +88,8 @@ Process* set_priority(Process* process, int priority) {
 }
 
 Process* start_first_time(Process* process) {
-  process.state = 1;
-  process-set_priority(process, 2);
+  process->state = 1;
+  set_priority(process, 2);
   return process;
 }
 

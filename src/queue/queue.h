@@ -1,5 +1,5 @@
 #pragma once
-#include "process.h"
+#include "../process/process.h"
 
 struct queue;
 typedef struct queue Queue;
@@ -8,10 +8,17 @@ struct queue {
     Process* front;
     Process* rear;
     int* size;
-};
+    };
 
-Queue* createQueue(unsigned capacity);
+Queue* createQueue();
 
-void enqueue(struct Queue* queue);
+void enqueue(Queue* queue,
+             char name,
+             int pid,
+             int start_time,
+             int cycles,
+             int wait,
+             int waiting_delay,
+             int s);
 
-int dequeue(struct Queue* queue);
+Process* dequeue(Queue* queue);
