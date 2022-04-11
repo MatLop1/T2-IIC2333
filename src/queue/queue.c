@@ -23,10 +23,16 @@ void enqueue(Queue* queue, char name, int pid, int start_time, int cycles, int w
     queue->size++;
 }
 
-Process* dequeue(Queue* queue)
-{
+Process* dequeue(Queue* queue) {
     Process* tmp = queue->front;
     queue->front = queue->front->next;
     queue->size--;
     return tmp;
+}
+
+Queue* wait_tick_queue(Queue* queue) {
+  // TODO:
+  //  for process in queue:
+  //      proc_tick(process)
+  return queue
 }

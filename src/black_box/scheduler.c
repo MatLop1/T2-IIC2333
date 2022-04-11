@@ -31,10 +31,10 @@ int get_quantum(int q_value, int priority) {
   return quantum_val;
 }
 
-void count_tick(Queue* queue1, Queue* queue2, Queue* queue3) {
-  queue1->wait_tick();
-  queue2->wait_tick();
-  queue3->wait_tick();
+void wait_tick_queue(Queue* queue1, Queue* queue2, Queue* queue3) {
+  wait_tick(queue1);
+  wait_tick(queue2);
+  wait_tick(queue3);
 
   return;
 }
