@@ -83,7 +83,7 @@ cmake-build-debug/*
 #/helloworld
 #/bash
 #/good_night
-./mlfq
+/mlfq
 
 # Otros
 /CMakeLists.txt
