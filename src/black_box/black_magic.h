@@ -6,4 +6,4 @@
 #pragma once
 
 // Funciones
-
+void tick();
