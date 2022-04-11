@@ -58,23 +58,30 @@ void run_fifo(int q, int priority,
 
   // TODO: Revisar que funcione bien al integrar el código
   if (process.is_finished == true) {
-    continue;
+    // TODO:push a lista de procesos terminados. Crear lista.
+    finished.push(*process);
 
   } else if (process.s <= 0) {
     process.reset_s();
     process.priority = 2;
-    queue1.push(*process)
+    queue1.push(*process);
 
   } else if (priority == 2){
     process.priority = 1;
-    queue2.push(*process)
+    queue2.push(*process);
 
   } else if (priority == 1) {
     process.priority = 0;
-    queue3.push(*process)
+    queue3.push(*process);
   }
+
+  return;
 }
 
+
+void run_sjf() {
+
+}
 
 
 // Hace pasar un ciclo.
@@ -82,7 +89,8 @@ void run_fifo(int q, int priority,
 //FIXME: Si pasa que el CPU no tiene nada que hacer, pero dsps van
 // a llegar programas, entonces va a marcar como que terminó.
 bool tick(int q, Queue queue1, Queue queue2, Queue queue3) {
-  load_programs()
+  load_programs();
+  queue3.sort();
 
   // TODO: Variable común??
   // TODO: guardar cuenta de ciclos en "algún" lugar
@@ -102,5 +110,10 @@ bool tick(int q, Queue queue1, Queue queue2, Queue queue3) {
   }
   //  TODO: Marcar cuál es el que está corriendo
 
-  return true;
+  // TODO: actualizar lista de prioridades en funciónd de S
+  //  ... Por las que vuelven a la cola 1
+  upd_priority_s(queue3);
+  upd_priority_s(queue2);
+
+    return true;
 }
