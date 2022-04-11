@@ -56,9 +56,9 @@ Process* dequeue_sfj(Queue* queue) {
         if (tmp4->pid == tmp3->pid){
             tmp4 = tmp4->next;
         } else {
-            if (tmp4->remaining_cycles < sfj->remaining_cycles & tmp4->state==1){
+            if (tmp4->remaining_cycles < sfj->remaining_cycles && tmp4->state==1){
                 tmp1 = tmp3;
-                sfj = tmp4
+                sfj = tmp4;
             }
             tmp3 = tmp3->next;
             tmp4 = tmp4->next;

@@ -12,14 +12,7 @@ struct queue {
 
 Queue* createQueue();
 
-void enqueue(Queue* queue,
-             char name,
-             int pid,
-             int start_time,
-             int cycles,
-             int wait,
-             int waiting_delay,
-             int s);
+void enqueue(Queue* queue, Process* process);
 
 Process* dequeue(Queue* queue);
 
