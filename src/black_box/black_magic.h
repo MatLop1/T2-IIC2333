@@ -6,4 +6,4 @@
 #pragma once
 
 // Funciones
-void tick();
+bool tick(int q, Queue queue1, Queue queue2, Queue queue3);
