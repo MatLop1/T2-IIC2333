@@ -26,7 +26,7 @@ int get_queue_quantum(int q_value, int priority) {
   return quantum_val;
 }
 
-void count_tick(Queue* queue1, Queue* queue2, Queue* queue3) {
+void make_tick_happen(Queue* queue1, Queue* queue2, Queue* queue3) {
   wait_tick_queue(queue1);
   wait_tick_queue(queue2);
   wait_tick_queue(queue3);
@@ -35,9 +35,14 @@ void count_tick(Queue* queue1, Queue* queue2, Queue* queue3) {
 }
 
 void run_fifo(int q, int priority,
+              Queue* running, Queue* finished,
               Queue* queue1, Queue* queue2, Queue* queue3) {
-  bool global_process_is_running;
+  // Necesito saber si hay un proceso corriendo
+  // y cuánto le queda
+  // TODO: hacer variable global o equiv
+  int global_remaining_quantum;
 
+  // Si hay un proceso corriendo, lo obtengo
   if (global_process_is_running)
 
   if (quantum == 0) {
