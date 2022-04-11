@@ -1,15 +1,16 @@
+#include <stdlib.h>
 #include "queue.h"
 
 Queue* createQueue()
 {
-    Queue* queue = (Queue*)malloc(sizeof(Queue));
+    Queue* queue = malloc(sizeof(Queue));
     queue->size = 0;
     queue->front = NULL;
     queue->rear = NULL;
     return queue;
 }
 
-void enqueue(Queue* queue, char[32] name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s)
+void enqueue(Queue* queue, char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s)
 {
     Process* tmp = createProcess(name, pid, start_time, cycles, wait, waiting_delay, s);
     if(!queue->front){
@@ -22,10 +23,16 @@ void enqueue(Queue* queue, char[32] name, int pid, int start_time, int cycles, i
     queue->size++;
 }
 
-Process* dequeue(Queue* queue)
-{
+Process* dequeue(Queue* queue) {
     Process* tmp = queue->front;
     queue->front = queue->front->next;
     queue->size--;
     return tmp;
+}
+
+Queue* wait_tick_queue(Queue* queue) {
+  // TODO:
+  //  for process in queue:
+  //      proc_tick(process)
+  return queue
 }
