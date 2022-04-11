@@ -66,7 +66,7 @@ Process* proc_tick(Process* process) {
   process->cycles_until_queue_reset -= 1;
 
   if (process->remaining_cycles == 0) {
-    end_process(*process);
+    end_process(process);
 
   } else {
     if (process->state != -1) {
@@ -89,7 +89,7 @@ Process* set_priority(Process* process, int priority) {
 
 Process* start_first_time(Process* process) {
   process->state = 1;
-  process-set_priority(*process, 2);
+  process-set_priority(process, 2);
   return process;
 }
 
