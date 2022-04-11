@@ -4,7 +4,7 @@
 
 // FIXME: IMPORTANTE: La cosa marca que '->' es 'Incomplete definition of struct process' para cada atributo.
 // FIXME: Marca error con 'char[32] name'. Lleva a un cierre de paréntesis implícito y muere.
-Process* createProcess(char[32] name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s) {
+Process* createProcess(char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s) {
   struct Process* process = (Process*) malloc (sizeof(Process));
   process->name = name;
   process->pid = pid;
