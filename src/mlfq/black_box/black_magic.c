@@ -13,10 +13,14 @@
 //Para poder hacer fork
 #include <unistd.h>
 
-//Módulos de la tarea pasada
-// Para debuguear
-# include "../debug/debug.h"
-// Mensajes de error
-# include "../errors/errors.h"
+#include "black_magic.h"
+
+int get_quantum(int q_value, int priority) {  //
+  int quantum_val;
+
+  quantum_val = q_value * priority;
+
+  return quantum_val;
+}
 
 
