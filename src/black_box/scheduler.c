@@ -26,17 +26,21 @@ int get_queue_quantum(int q_value, int priority) {
   return quantum_val;
 }
 
-void make_tick_happen(Queue* queue1, Queue* queue2, Queue* queue3) {
-  wait_tick_queue(queue1);
-  wait_tick_queue(queue2);
-  wait_tick_queue(queue3);
+void make_tick_happen(Queue* not_started_yet, Queue* running_queue, Queue* finished_queue,
+                      Queue* queue_p2, Queue* queue_p1, Queue* queue_p0) {
+  wait_tick_queue(not_started_yet);
+  wait_tick_queue(running_queue);
+  wait_tick_queue(finished_queue);
+  wait_tick_queue(queue_p2);
+  wait_tick_queue(queue_p1);
+  wait_tick_queue(queue_p0);
 
   return;
 }
 
 void run_fifo(int q, int priority,
-              Queue* running, Queue* finished,
-              Queue* queue1, Queue* queue2, Queue* queue3) {
+              Queue* not_started_yet, Queue* running_queue, Queue* finished_queue,
+              Queue* queue_p2, Queue* queue_p1, Queue* queue_p0) {
   // Necesito saber si hay un proceso corriendo
   // y cuánto le queda
   // TODO: hacer variable global o equiv
@@ -91,7 +95,9 @@ void run_fifo(int q, int priority,
 }
 
 
-void run_sjf() {
+void run_sjf(int q, int priority,
+             Queue* not_started_yet, Queue* running_queue, Queue* finished_queue,
+             Queue* queue_p2, Queue* queue_p1, Queue* queue_p0) {
   //Si no está corriendo lo reordena.
   if ( ! queue3[0].is_running ) {
     queue3.sort();
