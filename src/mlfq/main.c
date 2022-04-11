@@ -29,7 +29,7 @@
 # include "errors/errors.h"
 
 // Módulos de esta tarea
-# include "black_box/black_magic.h"
+# include "../black_box/black_magic.h"
 
 
 int main(int argc, char const *argv[]) {
