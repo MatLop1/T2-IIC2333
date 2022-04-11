@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// FIXME: IMPORTANTE: La cosa marca que '->' es 'Incomplete definition of struct process' para cada atributo.
 Process* createProcess(char name, int pid, int start_time, int cycles, int wait, int waiting_delay, int s) {
   Process* process = malloc (sizeof(Process));
   process->name = name;
