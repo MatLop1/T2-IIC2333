@@ -81,7 +81,7 @@ Process* proc_tick(Process* process) {
     }
   }
 
-  if (state==0 || state==1 || state=2){
+  if (process->state == 0 || process->state == 1 || process->state == 2){
     process->turnaround_time++;
   }
 
@@ -111,7 +111,7 @@ Process* sigstop(Process* process) {
   return process;
 }
 
-Process* sigsart(Process* process) {
+Process* sigstart(Process* process) {
   process->times_chosen++;
   process->state = 0;
   return process;

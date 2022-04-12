@@ -46,5 +46,5 @@ Process* set_priority(Process* process, int priority);
 Process* start_first_time(Process* process);
 
 Process* sigcont(Process* process);
-Process* sigstop(Process* process, bool is_waiting);
-
+Process* sigstop(Process* process);
+Process* sigstart(Process* process);
