@@ -52,4 +52,18 @@ int main(int argc, char const *argv[]) {
 	}
 
 	input_file_destroy(input_file);
+
+  // TODO:
+  //  - Crear cola procesos sin partir
+  //  - Crear cola procesos sin finalizados
+  //  - Crear cola proceso activo
+  //  - Crear cola proceso Prioridad 2
+  //  - Crear cola proceso Prioridad 1
+  //  - Crear cola proceso Prioridad 0
+  //  - Agregar procesos a la cola por iniciar
+  //  .
+  //  - while (len(cola_p2) + len(cola_p1) + len(cola_p0) > 0) {
+  //        tick(cola_null, cola_sin_comenzar, cola finalizado, cola_p2, cola_p1, cola_p0)
+  //    }
+
 }
