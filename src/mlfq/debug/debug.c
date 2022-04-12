@@ -27,6 +27,13 @@ void just_wait_longer() {
   return;
 }
 
+void wait_just_a_bit() {
+  if (DEBUG_MODE && SIMULATE_WAIT) {
+    usleep(WAITING_TIME3 * 1000);
+  }
+  return;
+}
+
 // Printea "\n"
 void dprint_line() {
   if (DEBUG_MODE) {
