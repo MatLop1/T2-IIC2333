@@ -7,6 +7,7 @@
 
 // Constante
 #define DEBUG_MODE 1
+#define SIMULATE_WAIT 1
 
 // Funciones
 void dprint_line();
