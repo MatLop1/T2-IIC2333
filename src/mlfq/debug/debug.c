@@ -96,46 +96,35 @@ void dprint_char_x2(char *input) {
 
 // Printea "DEBUG: **input\n"
 void dprint_txt_char_xx(char **input) {
-  if (DEBUG_MODE) {
-    char *start_color = "\033[32;3;1m";
-    char *end_color = "\033[0m";
-    printf("%sDEBUG: %s%s\n", start_color, *input, end_color);
-  }
-
+  dprint_txt();
+  dprint_char_xx(input);
+  dprint_line();
   return;
 }
 
 // Printea "DEBUG: **input\n"
 void dprint_txt_char_xx2(char **input) {
-  if (DEBUG_MODE) {
-    char *start_color = "\033[34;3;1m";
-    char *end_color = "\033[0m";
-    printf("%sDEBUG: %s%s\n", start_color, *input, end_color);
-  }
-
+  dprint_txt2();
+  dprint_char_xx2(input);
+  dprint_line();
   return;
 }
 
 // Printea "DEBUG: *input\n"
 void dprint_txt_char_x(char *input) {
-  if (DEBUG_MODE) {
-    char *start_color = "\033[36;3;1m";
-    char *end_color = "\033[0m";
-    printf("%sDEBUG: %s%s\n", start_color, input, end_color);
-  }
-
+  dprint_txt();
+  dprint_char_x(input);
+  dprint_line();
   return;
 }
 
 // Printea "DEBUG: *input\n"
 void dprint_txt_char_x2(char *input) {
-  if (DEBUG_MODE) {
-    char *start_color = "\033[34;3;1m";
-    char *end_color = "\033[0m";
-    printf("%sDEBUG: %s%s\n", start_color, input, end_color);
-  }
-
+  dprint_txt2();
+  dprint_char_x2(input);
+  dprint_line();
   return;
+}
 }
 
 
@@ -152,12 +141,9 @@ void dprint_pid(pid_t process_id) {
 
 // Printea "DEBUG: pid\n"
 void dprint_txt_pid(pid_t process_id) {
-  if (DEBUG_MODE) {
-    char *start_color = "\033[33;3;1m";
-    char *end_color = "\033[0m";
-    printf("%sDEBUG: %d%s\n", start_color, process_id, end_color);
-  }
-
+  dprint_txt();
+  dprint_pid(process_id);
+  dprint_line();
   return;
 }
 
@@ -174,12 +160,9 @@ void dprint_int(int input) {
 
 // Printea "DEBUG: input\n"
 void dprint_txt_int(int input) {
-  if (DEBUG_MODE) {
-    char *start_color = "\033[35;3;1m";
-    char *end_color = "\033[0m";
-    printf("%sDEBUG: %i%s\n", start_color, input, end_color);
-  }
-
+  dprint_txt();
+  dprint_int(input);
+  dprint_line();
   return;
 }
 
@@ -196,11 +179,8 @@ void dprint_float(float input) {
 
 // Printea "DEBUG: input\n"
 void dprint_txt_float(float input) {
-  if (DEBUG_MODE) {
-    char *start_color = "\033[31;3;1m";
-    char *end_color = "\033[0m";
-    printf("%sDEBUG: %f%s\n", start_color, input, end_color);
-  }
-
+  dprint_txt();
+  dprint_float(input);
+  dprint_line();
   return;
 }
