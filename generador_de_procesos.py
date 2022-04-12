@@ -2,7 +2,7 @@
 
 from random import randrange, randint, shuffle
 
-N_PROCESOS = 5
+N_PROCESOS = 3
 
 # -----
 
