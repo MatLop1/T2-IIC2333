@@ -17,11 +17,9 @@ struct queue {
 Queue* createQueue();
 
 void enqueue(Queue* queue, Process* process);
-
 Process* dequeue(Queue* queue);
 
 void wait_tick_queue(Queue* queue);
 
 void join_queue_reset(Queue* queue1, Queue* queue2);
-
 void join_queue_start(Queue* queue1, Queue* queue2);

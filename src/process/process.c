@@ -39,53 +39,38 @@ Process* createProcess(
   process->turnaround_time = 0;
   process->response_time = 0;
   process->waiting_time = 0;
+
+  process->in_first
   
   process->next = NULL;
   
   return process;
 }
 
-Process* end_process(Process* process) {
-  process->state = 3;
-  process->remaining_cycles = 0;
-  process->remaining_wait_time = -1;
-  process->active_cycles_until_wait = -1;
-  process->cycles_until_queue_reset = -1;
-  return process;
-}
-
 Process* proc_tick(Process* process) {
-  // TODO: Sumar valores al resumen
-  if (process->state == 0) {  // Running
-    process->remaining_cycles -= 1;
-    process->active_cycles_until_wait -= 1;
-
-  } else if (process->state == 2) {  // Waiting
-    process->remaining_wait_time -= 1;
-
-  } else if (process->state == -1) { // None
-    process->cycles_until_start -= 1;
+  
+  if (process->state == 3){ // Finished
+    return process;
   }
 
-  process->cycles_until_queue_reset -= 1;
-
-  if (process->remaining_cycles == 0) {
-    end_process(process);
-
-  } else {
-    if (process->state != -1) {
-      process->cycles_until_queue_reset -= 1;
-
-    } else {
-      process->cycles_until_start -= 1;
-    }
-  }
-
-  if (process->state == 0 || process->state == 1 || process->state == 2){
+  if (process->state == 0 || process->state == 1 || process->state == 2){ // Running, Waiting and Ready (Always)
     process->turnaround_time++;
+    process->cycles_until_queue_reset--;
   }
 
-  // TODO: Revisar se falta algún otro tipo de procesamiento
+  if (process->state == 0) {  // Running
+    process->remaining_cycles--;
+    process->active_cycles_until_wait--;
+  } else if (process->state == 2) {  // Waiting
+    process->waiting_time++;
+    process->remaining_wait_time--;
+  } else if (process->state == -1) { // None
+    process->cycles_until_start--;  
+  }
+
+  if (process->remaining_cycles == 0) { // There are cycles to complete? Yes, Finished; No, check if None
+    process->state = 3; // Finished
+  }
 
   return process;
 }
