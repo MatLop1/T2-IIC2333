@@ -145,8 +145,6 @@ void run_sjf(int q, int priority,
 //FIXME: Si pasa que el CPU no tiene nada que hacer, pero dsps van
 // a llegar programas, entonces va a marcar como que terminó.
 bool tick(int q, Queue queue1, Queue queue2, Queue queue3) {
-  load_programs();
-
   // TODO: Variable común??
   // TODO: guardar cuenta de ciclos en "algún" lugar
   ciclos ++

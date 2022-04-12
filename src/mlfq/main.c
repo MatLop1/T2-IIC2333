@@ -136,7 +136,7 @@ int main(int argc, char const *argv[]) {
     just_wait();
     dprint_line(); dprint_txt_char_x("- TICK -");dprint_line();
     wait_just_a_bit();
-//    tick();
+    tick(not_started_yet, running_queue, finished_queue, queue_p2, queue_p1, queue_p0);
 
     not_started_yet_size = not_started_yet->size;  // FIXME!!!
     running_queue_size = running_queue->size;  // FIXME!!!
@@ -146,10 +146,12 @@ int main(int argc, char const *argv[]) {
     break;
   }
 
+  // TODO
+  *file_name = (char *)argv[2];
+  OutputFile *output_file = save_file(file_name, data);
+
   // OPTIMIZE: No debería tener que limpiar todas las colas, pero mejor estar
   //  seguros.
-
-
   free_up_queue(not_started_yet);
   free_up_queue(running_queue);
   free_up_queue(finished_queue);
