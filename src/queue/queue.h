@@ -4,6 +4,8 @@
 
 #pragma once
 #include "../process/process.h"
+// Para debuguear
+#include "../mlfq/debug/debug.h"
 
 struct queue;
 typedef struct queue Queue;
@@ -16,8 +18,12 @@ struct queue {
 
 Queue* createQueue();
 
-void enqueue(Queue* queue, Process* process);
-Process* dequeue(Queue* queue);
+void enqueue(Queue* queue,
+             Process* process);
+
+Process* dequeue_sfj(Queue* queue);
+Process* dequeue_fifo(Queue* queue);
+Process* dequeue_normal(Queue* queue);
 
 void wait_tick_queue(Queue* queue);
 
