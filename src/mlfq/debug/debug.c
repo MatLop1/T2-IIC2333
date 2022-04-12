@@ -20,6 +20,13 @@ void just_wait() {
   return;
 }
 
+void just_wait_longer() {
+  if (DEBUG_MODE && SIMULATE_WAIT) {
+    usleep(WAITING_TIME2 * 1000);
+  }
+  return;
+}
+
 // Printea "\n"
 void dprint_line() {
   if (DEBUG_MODE) {

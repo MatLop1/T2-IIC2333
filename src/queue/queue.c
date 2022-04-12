@@ -63,18 +63,16 @@ Process* dequeue_fifo(Queue* queue) {
 }
 
 Process* dequeue_normal(Queue* queue) {
-  dprint_txt_char_x("Entro a dequeue normal");
-  
-  dprint_txt_char_x("tmp1 = queue[0]");
+//  dprint_txt_char_x("tmp1 = queue[0]");
   Process* tmp1 = queue->front;
   
-  dprint_txt_char_x("Si tmp1 no es NULL");
+//  dprint_txt_char_x("Si tmp1 no es NULL");
   if (tmp1) {
-    dprint_txt_char_x("Retorno el 1er nodo");
+//    dprint_txt_char_x("Retorno el 1er nodo");
     queue->front = tmp1->next;
     
   } else {
-    dprint_txt_char_x("Retorno NULL");
+//    dprint_txt_char_x("Retorno NULL");
   }
   
   return tmp1; 

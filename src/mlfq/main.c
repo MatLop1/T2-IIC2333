@@ -55,8 +55,11 @@ int main(int argc, char const *argv[]) {
 		for (int j = 0; j < 7; ++j)	{
 
 
-			printf("F%iC%i: %s ", i + 1, j + 1,input_file->lines[i][j]);
+			printf("F%iC%i: %s", i + 1, j + 1,input_file->lines[i][j]);
+      //printf("%s", input_file->lines[i][j]);
 		}
+
+    //printf("\n");
 
     char* name = input_file->lines[i][0];
     int pid = atoi(input_file->lines[i][1]);
@@ -67,8 +70,8 @@ int main(int argc, char const *argv[]) {
     int s = atoi(input_file->lines[i][6]);
 
     dprint_line();
-    dprint_txt_char_x("Datos del proceso");
-    dprint_txt(); dprint_char_x("Nombre:        "); dprint_char_x(name);     dprint_line();
+    dprint_txt_char_x("        Datos del proceso");
+    dprint_txt(); dprint_char_x("Nombre:        "); dprint_char_x2(name);     dprint_line();
     dprint_txt(); dprint_char_x("PID:           "); dprint_int(pid);         dprint_line();
     dprint_txt(); dprint_char_x("Inicio:        "); dprint_int(t_start);     dprint_line();
     dprint_txt(); dprint_char_x("Nro de ciclos: "); dprint_int(n_cycles);    dprint_line();
@@ -76,24 +79,27 @@ int main(int argc, char const *argv[]) {
     dprint_txt(); dprint_char_x("Tiempo espera: "); dprint_int(wait_delay);  dprint_line();
     dprint_txt(); dprint_char_x("S:             "); dprint_int(s);           dprint_line();
 
-    dprint_line(); dprint_char_x("\nVoy a crear un proceso");
+    just_wait_longer();
+    dprint_line(); dprint_char_x2("\nVoy a crear un proceso");
     Process* process = createProcess(name, pid, t_start, n_cycles, wait_cycles, wait_delay, s);
-    dprint_char_x("\nProceso creado !!");
+    dprint_char_x2("\nProceso creado!!");
 
     dprint_line(); dprint_char_x("\nMetiendo a la cola"); dprint_line();
     enqueue(not_started_yet, process);
     dprint_char_x("\nEstá en la cola"); dprint_line();
-		printf("\n");
+    just_wait_longer();
 	}
 
   for (int i = 0; i < input_file->len; ++i) {
-    dprint_txt(); dprint_char_x("Sacando de la cola un proceso"); dprint_line();
+    just_wait_longer();
+    dprint_txt_char_x2("Sacando de la cola un proceso");
     Process* process = dequeue_normal(not_started_yet);
+    dprint_txt_char_x("Salió de la cola!!");
+
     if(process){
       char* name2 = process->name;
-      printf("\nProceso: %s\n", name2);
-      dprint_txt(); dprint_char_x("Proceso: "); dprint_char_x(name2); dprint_line();
-      dprint_txt(); dprint_char_x("Lierando MEM"); dprint_line();
+      dprint_txt2(); dprint_char_x2("Proceso: "); dprint_char_x(name2); dprint_line();
+      dprint_txt2(); dprint_char_x("Lierando MEM"); dprint_line();
       free(process);
     }
   }

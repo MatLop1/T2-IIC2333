@@ -9,16 +9,15 @@
 #define DEBUG_MODE 1
 #define SIMULATE_WAIT 1
 #define WAITING_TIME 50  // ms
+#define WAITING_TIME2 350  // ms
 
 // Funciones
 void just_wait();
+void just_wait_longer();
 
 void dprint_line();
 void dprint_txt();
-
-void dprint_str();
-void dprint_txt_str();
-void dprint_txt_str2();
+void dprint_txt2();
 
 void dprint_char_xx(char **input);
 void dprint_char_x(char *input);
