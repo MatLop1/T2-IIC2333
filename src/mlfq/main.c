@@ -50,7 +50,12 @@ int main(int argc, char const *argv[]) {
 	printf("Cantidad de procesos: %d\n", input_file->len);
 	printf("Procesos:\n");
 
-  int len_queue;
+  int not_started_yet_size = 0;
+  int running_queue_size = 0;
+  int finished_queue_size = 0;
+  int queue_p2_size = 0;
+  int queue_p1_size = 0;
+  int queue_p0_size = 0;
 
 	for (int i = 0; i < input_file->len; ++i)	{
 		for (int j = 0; j < 7; ++j)	{
@@ -91,11 +96,30 @@ int main(int argc, char const *argv[]) {
     dprint_line();
     just_wait_longer();
 
-    len_queue = not_started_yet->size;  // FIXME!!!
-    dprint_txt(); dprint_char_x("Largo de cola: "); dprint_int(len_queue); dprint_line(); dprint_line();
+    not_started_yet_size = not_started_yet->size;  // FIXME!!!
+    dprint_txt(); dprint_char_x("Largo de cola: "); dprint_int(not_started_yet_size); dprint_line(); dprint_line();
 	}
 
-  for (int i = 0; i < len_queue; ++i) {
+  while (not_started_yet_size +
+           running_queue_size +
+           queue_p2_size +
+           queue_p1_size +
+           queue_p0_size > 0) {
+    dprint_line(); dprint_txt_char_x("     - - - - - - - ");
+    dprint_txt_char_x2("Procesos sin terminar:");
+    dprint_txt(); dprint_char_x("not_started_yet: "); dprint_int(not_started_yet_size); dprint_line();
+    dprint_txt(); dprint_char_x("running_queue: "); dprint_int(running_queue_size); dprint_line();
+    dprint_txt(); dprint_char_x("queue_p2: "); dprint_int(queue_p2_size); dprint_line();
+    dprint_txt(); dprint_char_x("queue_p1: "); dprint_int(queue_p1_size); dprint_line();
+    dprint_txt(); dprint_char_x("queue_p0: "); dprint_int(queue_p0_size); dprint_line();
+    dprint_line(); dprint_txt_char_x("     - - - - - - - ");
+
+    dprint_line(); dprint_txt_char_x("- TICK -");dprint_line();
+    tick();
+    break;
+  }
+
+  for (int i = 0; i < not_started_yet_size; ++i) {
     just_wait_longer();
     dprint_txt_char_x2("Sacando de la cola un proceso");
     Process* process = dequeue_normal(not_started_yet);
