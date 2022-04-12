@@ -12,6 +12,9 @@
 void dprint_line();
 void dprint_txt();
 
+void dprint_str();
+void dprint_txt_str();
+
 void dprint_char_xx(char **input);
 void dprint_char_x(char *input);
 void dprint_txt_char_xx(char **input);

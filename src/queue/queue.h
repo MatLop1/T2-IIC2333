@@ -4,6 +4,8 @@
 
 #pragma once
 #include "../process/process.h"
+// Para debuguear
+#include "../mlfq/debug/debug.h"
 
 struct queue;
 typedef struct queue Queue;

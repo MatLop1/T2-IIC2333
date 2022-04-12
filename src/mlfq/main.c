@@ -69,6 +69,7 @@ int main(int argc, char const *argv[]) {
     int s = atoi(input_file->lines[i][6]);
 
     dprint_line();
+    dprint_txt_char_x("Datos del proceso");
     dprint_txt(); dprint_char_x("Nombre:        "); dprint_char_x(name);     dprint_line();
     dprint_txt(); dprint_char_x("PID:           "); dprint_int(pid);         dprint_line();
     dprint_txt(); dprint_char_x("Inicio:        "); dprint_int(t_start);     dprint_line();
@@ -77,8 +78,13 @@ int main(int argc, char const *argv[]) {
     dprint_txt(); dprint_char_x("Tiempo espera: "); dprint_int(wait_delay);  dprint_line();
     dprint_txt(); dprint_char_x("S:             "); dprint_int(s);           dprint_line();
 
+    dprint_line(); dprint_char_x("\nVoy a crear un proceso");
     Process* process = createProcess(*name, pid, t_start, n_cycles, wait_cycles, wait_delay, s);
+    dprint_char_x("\nProceso creado !!");
 
+    dprint_line(); dprint_char_x("\nMetiendo a la cola"); dprint_line();
+    enqueue(not_started_yet, process);
+    dprint_char_x("\nEstá en la cola"); dprint_line();
 
 		printf("\n");
 	}
@@ -92,10 +98,4 @@ int main(int argc, char const *argv[]) {
   free(queue_p1);
   free(queue_p0);
 
-  // TODO:
-  //  - Agregar procesos a la cola por iniciar
-  //  .
-  //  - while (len(cola_p2) + len(cola_p1) + len(cola_p0) > 0) {
-  //        tick(cola_null, cola_sin_comenzar, cola finalizado, cola_p2, cola_p1, cola_p0)
-  //    }
 }
