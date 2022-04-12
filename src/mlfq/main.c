@@ -80,27 +80,32 @@ int main(int argc, char const *argv[]) {
     dprint_txt(); dprint_char_x("S:             "); dprint_int(s);           dprint_line();
 
     just_wait_longer();
-    dprint_line(); dprint_char_x2("\nVoy a crear un proceso");
+    dprint_txt_char_x2("Voy a crear un proceso");
     Process* process = createProcess(name, pid, t_start, n_cycles, wait_cycles, wait_delay, s);
-    dprint_char_x2("\nProceso creado!!");
+    dprint_txt_char_x2("Proceso creado!!");
 
-    dprint_line(); dprint_char_x("\nMetiendo a la cola"); dprint_line();
+    dprint_txt_char_x("Metiendo a la cola");
     enqueue(not_started_yet, process);
-    dprint_char_x("\nEstá en la cola"); dprint_line();
+    dprint_txt_char_x("Está en la cola");
+    dprint_line();
     just_wait_longer();
 	}
+
+
 
   for (int i = 0; i < input_file->len; ++i) {
     just_wait_longer();
     dprint_txt_char_x2("Sacando de la cola un proceso");
     Process* process = dequeue_normal(not_started_yet);
-    dprint_txt_char_x("Salió de la cola!!");
+    dprint_txt_char_x2("Salió de la cola!!");
 
     if(process){
       char* name2 = process->name;
-      dprint_txt2(); dprint_char_x2("Proceso: "); dprint_char_x(name2); dprint_line();
-      dprint_txt2(); dprint_char_x("Lierando MEM"); dprint_line();
+      dprint_txt(); dprint_char_x("Proceso: "); dprint_char_x2(name2); dprint_line();
+
+      dprint_txt_char_x2("Lierando MEM");
       free(process);
+      dprint_txt_char_x2("Liberada!!"); dprint_line();
     }
   }
 
