@@ -9,6 +9,7 @@
 #define DEBUG_MODE 1
 
 // Funciones
+void dprint_line();
 void dprint_txt();
 
 void dprint_char_xx(char **input);
@@ -22,5 +23,5 @@ void dprint_txt_pid(pid_t process_id);
 void dprint_int(int input);
 void dprint_txt_int(int input);
 
-void dprint_txt_float(float input);
+void dprint_float(float input);
 void dprint_txt_float(float input);

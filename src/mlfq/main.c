@@ -68,9 +68,9 @@ int main(int argc, char const *argv[]) {
     int wait_delay = atoi(input_file->lines[i][5]);
     int s = atoi(input_file->lines[i][6]);
 
-    printf("\n");
-    dprint1("Nombre: ");
-    dprint3(*name);
+    dprint_line(); dprint_txt(); dprint_line();
+    dprint_char_x("Nombre: "); dprint_line();
+    dprint_char_xx(*name); dprint_line();
     printf("PID: %i\n", pid);
     printf("T: %i\n", pid);
     printf("PID: %i\n", pid);

@@ -13,16 +13,24 @@
 #include "debug.h"
 
 
-// Printea "DEBUG: "
-void dprint_txt() {
+// Printea "\n"
+void dprint_line() {
   if (DEBUG_MODE) {
-    char *start_color = "\032[35;3;1m";
-    char *end_color = "\032[0m";
-    printf("%sDEBUG: %s", start_color, end_color);
+    printf("\n");
   }
   return;
 }
 
+// Printea "DEBUG: "
+void dprint_txt() {
+  if (DEBUG_MODE) {
+    char *start_color = "\033[33;3;1m";
+    char *end_color = "\033[0m";
+    printf("%sDEBUG: %s\n", start_color, end_color);
+  }
+
+  return;
+}
 // Printea "**input"
 void dprint_char_xx(char **input) {
   if (DEBUG_MODE) {
@@ -112,7 +120,7 @@ void dprint_txt_int(int input) {
 }
 
 // Printea "input"
-void dprint_txt_float(float input) {
+void dprint_float(float input) {
   if (DEBUG_MODE) {
     char *start_color = "\033[38;3;1m";
     char *end_color = "\033[0m";
