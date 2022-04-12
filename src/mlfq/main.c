@@ -37,6 +37,14 @@
 int main(int argc, char const *argv[]) {
 
 	/*Lectura del input*/
+
+  Queue* not_started_yet = createQueue();
+  Queue* running_queue = createQueue();
+  Queue* finished_queue = createQueue();
+  Queue* queue_p2 = createQueue();
+  Queue* queue_p1 = createQueue();
+  Queue* queue_p0 = createQueue();
+
 	char *file_name = (char *)argv[1];
 	InputFile *input_file = read_file(file_name);
 
@@ -47,23 +55,30 @@ int main(int argc, char const *argv[]) {
 
 	for (int i = 0; i < input_file->len; ++i)	{
 		for (int j = 0; j < 7; ++j)	{
-			printf("%s ", input_file->lines[i][j]);
+
+
+			printf("F%iC%i: %s ", i + 1, j + 1,input_file->lines[i][j]);
 		}
+
+    char *name = input_file->lines[i][0];
+    int pid = atoi(input_file->lines[i][1]);
+    int t_start = atoi(input_file->lines[i][2]);
+    int n_cycles = atoi(input_file->lines[i][3]);
+    int wait_cycles = atoi(input_file->lines[i][4]);
+    int wait_delay = atoi(input_file->lines[i][5]);
+    int s = atoi(input_file->lines[i][6]);
+
+    printf("\n");
+    printf("PID: %i\n", pid);
+    printf("\n");
+
+    Process* process = createProcess(*name, pid, t_start, n_cycles, wait_cycles, wait_delay, s);
+
 
 		printf("\n");
 	}
 
 	input_file_destroy(input_file);
-
-  // TODO:
-  Queue* not_started_yet = createQueue();
-  Queue* running_queue = createQueue();
-  Queue* finished_queue = createQueue();
-  Queue* queue_p2 = createQueue();
-  Queue* queue_p1 = createQueue();
-  Queue* queue_p0 = createQueue();
-
-  
 
   free(not_started_yet);
   free(running_queue);
@@ -72,12 +87,7 @@ int main(int argc, char const *argv[]) {
   free(queue_p1);
   free(queue_p0);
 
-  //  - Crear cola procesos sin partir
-  //  - Crear cola procesos sin finalizados
-  //  - Crear cola proceso activo
-  //  - Crear cola proceso Prioridad 2
-  //  - Crear cola proceso Prioridad 1
-  //  - Crear cola proceso Prioridad 0
+  // TODO:
   //  - Agregar procesos a la cola por iniciar
   //  .
   //  - while (len(cola_p2) + len(cola_p1) + len(cola_p0) > 0) {
