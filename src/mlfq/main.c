@@ -100,6 +100,7 @@ int main(int argc, char const *argv[]) {
     dprint_txt(); dprint_char_x("Largo de cola: "); dprint_int(not_started_yet_size); dprint_line(); dprint_line();
 	}
 
+  // Main loop
   while (not_started_yet_size +
            running_queue_size +
            queue_p2_size +
@@ -114,9 +115,16 @@ int main(int argc, char const *argv[]) {
     dprint_txt(); dprint_char_x("queue_p0: "); dprint_int(queue_p0_size); dprint_line();
     dprint_line(); dprint_txt_char_x("     - - - - - - - ");
 
+    just_wait();
     dprint_line(); dprint_txt_char_x("- TICK -");dprint_line();
-    tick();
-    break;
+    wait_just_a_bit();
+//    tick();
+
+    not_started_yet_size = not_started_yet->size;  // FIXME!!!
+    running_queue_size = running_queue->size;  // FIXME!!!
+    queue_p2_size = queue_p2->size;  // FIXME!!!
+    queue_p1_size = queue_p1->size;  // FIXME!!!
+    queue_p0_size = queue_p0->size;  // FIXME!!!
   }
 
   for (int i = 0; i < not_started_yet_size; ++i) {
