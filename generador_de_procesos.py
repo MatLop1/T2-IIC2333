@@ -14,7 +14,7 @@ shuffle(pids)
 procesos = list()
 
 for n in range(N_PROCESOS):
-    nombre = "PROCESS" + str(n + 1).rjust(4, '0')
+    nombre = "PROCESS-" + str(n + 1).rjust(4, '0')
     pid = pids.pop(0)
     inicio = 0 if len(procesos) < 3 else randint(0, 10 * len(procesos))
     ciclos = randint(50, 500)
