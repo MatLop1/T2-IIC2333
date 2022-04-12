@@ -63,6 +63,8 @@ int main(int argc, char const *argv[]) {
   char *file_name = (char *)argv[1];
   InputFile *input_file = read_file(file_name);
 
+  const int *q_value = (int *)argv[3];
+
 	/*Mostramos el archivo de input en consola*/
 	printf("Nombre archivo: %s\n", file_name);
 	printf("Cantidad de procesos: %d\n", input_file->len);
@@ -120,10 +122,10 @@ int main(int argc, char const *argv[]) {
 
   // Main loop
   while (not_started_yet_size +
-           running_queue_size +
-           queue_p2_size +
-           queue_p1_size +
-           queue_p0_size > 0) {
+         running_queue_size +
+         queue_p2_size +
+         queue_p1_size +
+         queue_p0_size > 0) {
     dprint_line(); dprint_txt_char_x("     - - - - - - - ");
     dprint_txt_char_x2("Procesos sin terminar:");
     dprint_txt(); dprint_char_x("not_started_yet: "); dprint_int(not_started_yet_size); dprint_line();
@@ -136,19 +138,19 @@ int main(int argc, char const *argv[]) {
     just_wait();
     dprint_line(); dprint_txt_char_x("- TICK -");dprint_line();
     wait_just_a_bit();
-    tick(not_started_yet, running_queue, finished_queue, queue_p2, queue_p1, queue_p0);
+    tick(q_value, not_started_yet, running_queue, finished_queue, queue_p2, queue_p1, queue_p0);
 
     not_started_yet_size = not_started_yet->size;  // FIXME!!!
     running_queue_size = running_queue->size;  // FIXME!!!
     queue_p2_size = queue_p2->size;  // FIXME!!!
     queue_p1_size = queue_p1->size;  // FIXME!!!
     queue_p0_size = queue_p0->size;  // FIXME!!!
-    break;
+    //break;
   }
 
-  // TODO
-  *file_name = (char *)argv[2];
-  OutputFile *output_file = save_file(file_name, data);
+  // TODO: Guardar en un archivo los resultados
+  //*file_name = (char *)argv[2];
+  //OutputFile *output_file = save_file(file_name, data);
 
   // OPTIMIZE: No debería tener que limpiar todas las colas, pero mejor estar
   //  seguros.
