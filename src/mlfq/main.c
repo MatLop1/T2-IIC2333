@@ -25,8 +25,6 @@
 //Módulos de la tarea pasada
 // Para debuguear
 #include "debug/debug.h"
-// Mensajes de error
-#include "errors/errors.h"
 
 // Módulos de esta tarea
 #include "../black_box/scheduler.h"
