@@ -24,12 +24,14 @@
 
 //Módulos de la tarea pasada
 // Para debuguear
-# include "debug/debug.h"
+#include "debug/debug.h"
 // Mensajes de error
-# include "errors/errors.h"
+#include "errors/errors.h"
 
 // Módulos de esta tarea
-# include "../black_box/scheduler.h"
+#include "../black_box/scheduler.h"
+#include "../queue/queue.h"
+#include "../queue/queue.h"
 
 
 int main(int argc, char const *argv[]) {
@@ -54,6 +56,22 @@ int main(int argc, char const *argv[]) {
 	input_file_destroy(input_file);
 
   // TODO:
+  Queue* not_started_yet = createQueue();
+  Queue* running_queue = createQueue();
+  Queue* finished_queue = createQueue();
+  Queue* queue_p2 = createQueue();
+  Queue* queue_p1 = createQueue();
+  Queue* queue_p0 = createQueue();
+
+  
+
+  free(not_started_yet);
+  free(running_queue);
+  free(finished_queue);
+  free(queue_p2);
+  free(queue_p1);
+  free(queue_p0);
+
   //  - Crear cola procesos sin partir
   //  - Crear cola procesos sin finalizados
   //  - Crear cola proceso activo
@@ -65,5 +83,4 @@ int main(int argc, char const *argv[]) {
   //  - while (len(cola_p2) + len(cola_p1) + len(cola_p0) > 0) {
   //        tick(cola_null, cola_sin_comenzar, cola finalizado, cola_p2, cola_p1, cola_p0)
   //    }
-
 }
