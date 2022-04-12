@@ -21,6 +21,8 @@
 #include "scheduler.h"
 
 
+int tick_count = 0;
+
 // Obtiene el quantum del proceso en base a la fórmula del enunciado
 int get_queue_quantum(int q_value, int priority) {
   int quantum_val;
@@ -144,7 +146,7 @@ void run_sjf(int q, int priority,
 // Retorna falso si no hay más programas en la cola
 //FIXME: Si pasa que el CPU no tiene nada que hacer, pero dsps van
 // a llegar programas, entonces va a marcar como que terminó.
-void tick(int* q,
+void tick2(int* q,
           Queue* not_started_yet,
           Queue* running_queue,
           Queue* finished_queue,
@@ -176,3 +178,15 @@ void tick(int* q,
 
     return true;
 }
+
+
+int tick(int* q,
+         Queue* not_started_yet,
+         Queue* running_queue,
+         Queue* finished_queue,
+         Queue* queue_p2,
+         Queue* queue_p1,
+         Queue* queue_p0) {
+
+}
+

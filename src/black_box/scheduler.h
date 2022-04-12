@@ -23,7 +23,7 @@ void run_sjf(
     int q, int priority,
     Queue* not_started_yet, Queue* running_queue, Queue* finished_queue,
     Queue* queue_p2, Queue* queue_p1, Queue* queue_p0);
-void tick(int* q,
+int tick(int* q,
           Queue* not_started_yet,
           Queue* running_queue,
           Queue* finished_queue,
