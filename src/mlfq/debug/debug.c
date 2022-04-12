@@ -125,7 +125,6 @@ void dprint_txt_char_x2(char *input) {
   dprint_line();
   return;
 }
-}
 
 
 // Printea "pid"
