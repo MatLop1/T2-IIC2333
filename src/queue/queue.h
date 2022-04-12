@@ -22,5 +22,9 @@ void enqueue(Queue* queue,
 Process* dequeue(Queue* queue);
 
 Queue* wait_tick_queue(Queue* queue);
-Process* pop(Queue* queue, int pos);
-void push(Queue* queue, int pos);
+
+Queue* extract_queue_reset(Queue* queue);
+
+void join_queue_reset(Queue* queue1, Queue* queue2);
+
+void kill_queue(Queue* queue);

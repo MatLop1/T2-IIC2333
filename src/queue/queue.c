@@ -15,7 +15,7 @@ Queue* createQueue() {
 
 void enqueue(Queue* queue, Process* process) {
     Process* tmp = process;
-    if (!queue->front){
+    if (!queue->front) {
         queue->rear->next = tmp;
         queue->rear = tmp;
 
@@ -57,7 +57,6 @@ Process* dequeue_sfj(Queue* queue) {
     }
     
     Process* tmp1 = sfj;
-    Process* tmp2 = sfj;
     Process* tmp3 = sfj;
     Process* tmp4 = sfj;
 
@@ -68,7 +67,6 @@ Process* dequeue_sfj(Queue* queue) {
         } else {
             if (tmp4->remaining_cycles < sfj->remaining_cycles && tmp4->state==1) {
                 tmp1 = tmp3;
-                tmp2 = tmp4;
                 sfj = tmp4;
             }
 
@@ -76,9 +74,8 @@ Process* dequeue_sfj(Queue* queue) {
             tmp4 = tmp4->next;
         }
     }
-
     if (sfj) {
-        tmp1->next = tmp2->next;
+        tmp1->next = sfj->next;
         queue->size--;
     }
 
@@ -86,23 +83,86 @@ Process* dequeue_sfj(Queue* queue) {
 }
 
 Queue* wait_tick_queue(Queue* queue) {
-  // TODO:
-  //  for process in queue:
-  //      proc_tick(process)
-  return queue;
+    Process* process = queue->front;
+    while(process){
+        proc_tick(process);
+        process = process->next;
+    }
+    return queue;
 }
 
-Process* pop(Queue* queue, int pos) {
-  // 0 por defecto --> Saca el primero
-  // TODO
-  return process;
+// ingresa todos los procesos que ya completaron su tiempo de envejecimiento (queue2) a la cola N°1 (queue1)
+void join_queue_reset(Queue* queue1, Queue* queue2){
+    Queue* new_queue = createQueue();
+    Process* tmp1 = queue2->front;
+    Process* tmp2 = queue2->front;
+    while(tmp2){
+        if (tmp1->pid == tmp2->pid){
+            if(tmp2->cycles_until_queue_reset == 0){
+                tmp2->cycles_until_queue_reset = tmp2->s;
+                enqueue(new_queue, tmp2);
+                queue2->front = queue2->front->next;
+                tmp1 = queue2->front;
+                tmp2 = queue2->front;
+            } else {
+                tmp2 = tmp2->next;
+            }
+        } else {
+            if(tmp2->cycles_until_queue_reset == 0){
+                tmp2->cycles_until_queue_reset = tmp2->s;
+                enqueue(new_queue, tmp2);
+                tmp1->next = tmp2->next;
+                tmp2 = tmp2->next;
+            } else {
+                tmp1 = tmp1->next;
+                tmp2 = tmp2->next;
+            }
+        }
+    }
+
+    if(queue1->rear){
+        queue1->rear->next = new_queue->front;
+    } else {
+        queue1->front = new_queue->front;
+        queue1->rear = new_queue->rear;
+    }
+
+    free(new_queue);
 }
 
-void push(Queue* queue, int pos) {
-  // -1 por defecto --> Lo pone al final
-  // TODO
+// ingresa todos los procesos que ya completaron su tiempo para iniciar (queue2) a la cola N°1 (queue1)
+void join_queue_start(Queue* queue1, Queue* queue2){
+    Queue* new_queue = createQueue();
+    Process* tmp1 = queue2->front;
+    Process* tmp2 = queue2->front;
+    while(tmp2){
+        if (tmp1->pid == tmp2->pid){
+            if(tmp2->cycles_until_start == 0){
+                enqueue(new_queue, tmp2);
+                queue2->front = queue2->front->next;
+                tmp1 = queue2->front;
+                tmp2 = queue2->front;
+            } else {
+                tmp2 = tmp2->next;
+            }
+        } else {
+            if(tmp2->cycles_until_start == 0){
+                enqueue(new_queue, tmp2);
+                tmp1->next = tmp2->next;
+                tmp2 = tmp2->next;
+            } else {
+                tmp1 = tmp1->next;
+                tmp2 = tmp2->next;
+            }
+        }
+    }
+
+    if(queue1->rear){
+        queue1->rear->next = new_queue->front;
+    } else {
+        queue1->front = new_queue->front;
+        queue1->rear = new_queue->rear;
+    }
+
+    free(new_queue);
 }
-
-
-
-
