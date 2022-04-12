@@ -45,7 +45,7 @@ void dprint_char_xx(char **input) {
 // Printea "*input"
 void dprint_char_x(char *input) {
   if (DEBUG_MODE) {
-    char *start_color = "\033[31;3;1m";
+    char *start_color = "\033[35;3;1m";
     char *end_color = "\033[0m";
     printf("%s%s%s", start_color, input, end_color);
   }
@@ -67,7 +67,7 @@ void dprint_txt_char_xx(char **input) {
 // Printea "DEBUG: *input\n"
 void dprint_txt_char_x(char *input) {
   if (DEBUG_MODE) {
-    char *start_color = "\033[31;3;1m";
+    char *start_color = "\033[35;3;1m";
     char *end_color = "\033[0m";
     printf("%sDEBUG: %s%s\n", start_color, input, end_color);
   }

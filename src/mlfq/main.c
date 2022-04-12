@@ -68,15 +68,14 @@ int main(int argc, char const *argv[]) {
     int wait_delay = atoi(input_file->lines[i][5]);
     int s = atoi(input_file->lines[i][6]);
 
-    dprint_line(); dprint_txt(); dprint_line();
-    dprint_char_x("Nombre: "); dprint_line();
-    dprint_char_xx(*name); dprint_line();
-    printf("PID: %i\n", pid);
-    printf("T: %i\n", pid);
-    printf("PID: %i\n", pid);
-    printf("PID: %i\n", pid);
-    printf("PID: %i\n", pid);
-    printf("\n");
+    dprint_line();
+    dprint_txt(); dprint_char_x("Nombre:        "); dprint_char_x(name);     dprint_line();
+    dprint_txt(); dprint_char_x("PID:           "); dprint_int(pid);         dprint_line();
+    dprint_txt(); dprint_char_x("Inicio:        "); dprint_int(t_start);     dprint_line();
+    dprint_txt(); dprint_char_x("Nro de ciclos: "); dprint_int(n_cycles);    dprint_line();
+    dprint_txt(); dprint_char_x("Ciclos espera: "); dprint_int(wait_cycles); dprint_line();
+    dprint_txt(); dprint_char_x("Tiempo espera: "); dprint_int(wait_delay);  dprint_line();
+    dprint_txt(); dprint_char_x("S:             "); dprint_int(s);           dprint_line();
 
     Process* process = createProcess(*name, pid, t_start, n_cycles, wait_cycles, wait_delay, s);
 
