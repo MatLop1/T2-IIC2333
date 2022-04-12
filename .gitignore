@@ -90,3 +90,7 @@ cmake-build-debug/*
 *.zip
 *.tar.gz
 *.rar
+
+# Python
+venv/
+venv/*
