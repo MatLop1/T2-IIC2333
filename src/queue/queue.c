@@ -62,7 +62,6 @@ Process* dequeue_fifo(Queue* queue) {
   return tmp2;
 }
 
-
 Process* dequeue_normal(Queue* queue) {
   dprint_txt_char_x("Entro a dequeue normal");
   
@@ -70,7 +69,7 @@ Process* dequeue_normal(Queue* queue) {
   Process* tmp1 = queue->front;
   
   dprint_txt_char_x("Si tmp1 no es NULL");
-  if (tmp1 != NULL) {
+  if (tmp1) {
     dprint_txt_char_x("Retorno el 1er nodo");
     queue->front = tmp1->next;
     
@@ -78,8 +77,7 @@ Process* dequeue_normal(Queue* queue) {
     dprint_txt_char_x("Retorno NULL");
   }
   
-  return tmp1;
-  
+  return tmp1; 
 }
 
 // Saca de la cola un proceso que cumple con SFJ, si hay varios es en FIFO
