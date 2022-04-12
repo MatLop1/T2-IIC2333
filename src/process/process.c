@@ -7,7 +7,7 @@
 Process* createProcess(
     char name, int pid, int start_time, int cycles,
     int wait, int waiting_delay, int s) {
-  Process* process = malloc (sizeof(Process));
+  Process* process = malloc(sizeof(Process));
   process->name = name;
   process->pid = pid;
   process->start_time = start_time;
@@ -81,33 +81,38 @@ Process* proc_tick(Process* process) {
     }
   }
 
+  if (state==0 || state==1 || state=2){
+    process->turnaround_time++;
+  }
+
   // TODO: Revisar se falta algún otro tipo de procesamiento
 
   return process;
 }
 
 Process* set_priority(Process* process, int priority) {
-  // TODO: Pendiente reasignar valor del atributo
+  process->priority = priority;
   return process;
 }
 
 Process* start_first_time(Process* process) {
   process->state = 1;
-  set_priority(process, 2);
-  return process;
+  return set_priority(process, 2);;
 }
 
 Process* sigcont(Process* process) {
-  // TODO:
-  //  process.state = 0
-  //  ¿?
+  process->state = 1;
   return process;
 }
 
-Process* sigstop(Process* process, bool is_waiting) {
-  // TODO:
-  //  process.times_interrupted ++
-  //  process.state = 2 if (is_waiting) else 1
-  //  ¿?
+Process* sigstop(Process* process) {
+  process->times_interrupted++;
+  process->state = 2;
+  return process;
+}
+
+Process* sigsart(Process* process) {
+  process->times_chosen++;
+  process->state = 0;
   return process;
 }

@@ -16,8 +16,7 @@ struct queue {
 
 Queue* createQueue();
 
-void enqueue(Queue* queue,
-             Process* process);
+void enqueue(Queue* queue, Process* process);
 
 Process* dequeue(Queue* queue);
 
