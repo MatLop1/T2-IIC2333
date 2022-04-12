@@ -79,3 +79,79 @@ Queue* wait_tick_queue(Queue* queue) {
     }
     return queue;
 }
+
+// ingresa todos los procesos que ya completaron su tiempo de envejecimiento (queue2) a la cola N°1 (queue1)
+void join_queue_reset(Queue* queue1, Queue* queue2){
+    Queue* new_queue = createQueue();
+    Process* tmp1 = queue2->front;
+    Process* tmp2 = queue2->front;
+    while(tmp2){
+        if (tmp1->pid == tmp2->pid){
+            if(tmp2->cycles_until_queue_reset == 0){
+                tmp2->cycles_until_queue_reset = tmp2->s;
+                enqueue(new_queue, tmp2);
+                queue2->front = queue2->front->next;
+                tmp1 = queue2->front;
+                tmp2 = queue2->front;
+            } else {
+                tmp2 = tmp2->next;
+            }
+        } else {
+            if(tmp2->cycles_until_queue_reset == 0){
+                tmp2->cycles_until_queue_reset = tmp2->s;
+                enqueue(new_queue, tmp2);
+                tmp1->next = tmp2->next;
+                tmp2 = tmp2->next;
+            } else {
+                tmp1 = tmp1->next;
+                tmp2 = tmp2->next;
+            }
+        }
+    }
+
+    if(queue1->rear){
+        queue1->rear->next = new_queue->front;
+    } else {
+        queue1->front = new_queue->front;
+        queue1->rear = new_queue->rear;
+    }
+
+    free(new_queue);
+}
+
+// ingresa todos los procesos que ya completaron su tiempo para iniciar (queue2) a la cola N°1 (queue1)
+void join_queue_start(Queue* queue1, Queue* queue2){
+    Queue* new_queue = createQueue();
+    Process* tmp1 = queue2->front;
+    Process* tmp2 = queue2->front;
+    while(tmp2){
+        if (tmp1->pid == tmp2->pid){
+            if(tmp2->cycles_until_start == 0){
+                enqueue(new_queue, tmp2);
+                queue2->front = queue2->front->next;
+                tmp1 = queue2->front;
+                tmp2 = queue2->front;
+            } else {
+                tmp2 = tmp2->next;
+            }
+        } else {
+            if(tmp2->cycles_until_start == 0){
+                enqueue(new_queue, tmp2);
+                tmp1->next = tmp2->next;
+                tmp2 = tmp2->next;
+            } else {
+                tmp1 = tmp1->next;
+                tmp2 = tmp2->next;
+            }
+        }
+    }
+
+    if(queue1->rear){
+        queue1->rear->next = new_queue->front;
+    } else {
+        queue1->front = new_queue->front;
+        queue1->rear = new_queue->rear;
+    }
+
+    free(new_queue);
+}
