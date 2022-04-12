@@ -12,6 +12,13 @@
 //Importar archivo
 #include "debug.h"
 
+// https://qnaplus.com/c-program-to-sleep-in-milliseconds/
+void just_wait() {
+  if (DEBUG_MODE && SIMULATE_WAIT) {
+    usleep(WAITING_TIME * 1000);
+  }
+  return;
+}
 
 // Printea "\n"
 void dprint_line() {

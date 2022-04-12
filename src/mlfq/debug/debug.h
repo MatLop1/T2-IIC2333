@@ -8,8 +8,11 @@
 // Constante
 #define DEBUG_MODE 1
 #define SIMULATE_WAIT 1
+#define WAITING_TIME 1000  // ms
 
 // Funciones
+void just_wait();
+
 void dprint_line();
 void dprint_txt();
 
