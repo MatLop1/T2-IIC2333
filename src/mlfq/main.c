@@ -33,9 +33,7 @@
 
 
 int main(int argc, char const *argv[]) {
-
-	/*Lectura del input*/
-
+  //Creo las colas
   Queue* not_started_yet = createQueue();
   Queue* running_queue = createQueue();
   Queue* finished_queue = createQueue();
@@ -43,24 +41,25 @@ int main(int argc, char const *argv[]) {
   Queue* queue_p1 = createQueue();
   Queue* queue_p0 = createQueue();
 
-	char *file_name = (char *)argv[1];
-	InputFile *input_file = read_file(file_name);
+  /*Lectura del input*/
+  char *file_name = (char *)argv[1];
+  InputFile *input_file = read_file(file_name);
 
 	/*Mostramos el archivo de input en consola*/
 	printf("Nombre archivo: %s\n", file_name);
 	printf("Cantidad de procesos: %d\n", input_file->len);
 	printf("Procesos:\n");
 
+  int len_queue;
+
 	for (int i = 0; i < input_file->len; ++i)	{
 		for (int j = 0; j < 7; ++j)	{
 
 
 			printf("F%iC%i: %s", i + 1, j + 1,input_file->lines[i][j]);
-      //printf("%s", input_file->lines[i][j]);
 		}
 
-    //printf("\n");
-
+    // Separo las variables con las características del proceso
     char* name = input_file->lines[i][0];
     int pid = atoi(input_file->lines[i][1]);
     int t_start = atoi(input_file->lines[i][2]);
@@ -79,21 +78,24 @@ int main(int argc, char const *argv[]) {
     dprint_txt(); dprint_char_x("Tiempo espera: "); dprint_int(wait_delay);  dprint_line();
     dprint_txt(); dprint_char_x("S:             "); dprint_int(s);           dprint_line();
 
+    //Instancio un proceso
     just_wait_longer();
     dprint_txt_char_x2("Voy a crear un proceso");
     Process* process = createProcess(name, pid, t_start, n_cycles, wait_cycles, wait_delay, s);
     dprint_txt_char_x2("Proceso creado!!");
 
+    //Lo agrego a la cola
     dprint_txt_char_x("Metiendo a la cola");
     enqueue(not_started_yet, process);
     dprint_txt_char_x("Está en la cola");
     dprint_line();
     just_wait_longer();
+
+    len_queue = not_started_yet->size;  // FIXME!!!
+    dprint_txt(); dprint_char_x("Largo de cola: "); dprint_int(len_queue); dprint_line(); dprint_line();
 	}
 
-
-
-  for (int i = 0; i < input_file->len; ++i) {
+  for (int i = 0; i < len_queue; ++i) {
     just_wait_longer();
     dprint_txt_char_x2("Sacando de la cola un proceso");
     Process* process = dequeue_normal(not_started_yet);
