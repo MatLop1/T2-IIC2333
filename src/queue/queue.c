@@ -83,6 +83,7 @@ void wait_tick_queue(Queue* queue) {
     }
 }
 
+// Une queue2 al final de la queue1
 void join_queue(Queue* queue1, Queue* queue2){
     if(queue1->rear){
         queue1->rear->next = queue2->front;
