@@ -15,7 +15,7 @@
 // https://qnaplus.com/c-program-to-sleep-in-milliseconds/
 void just_wait() {
   if (DEBUG_MODE && SIMULATE_WAIT) {
-    usleep(WAITING_TIME * 1000);
+    usleep(WAITING_TIME * 50);
   }
   return;
 }
