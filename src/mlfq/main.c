@@ -69,6 +69,12 @@ int main(int argc, char const *argv[]) {
     int s = atoi(input_file->lines[i][6]);
 
     printf("\n");
+    dprint1("Nombre: ");
+    dprint3(*name);
+    printf("PID: %i\n", pid);
+    printf("T: %i\n", pid);
+    printf("PID: %i\n", pid);
+    printf("PID: %i\n", pid);
     printf("PID: %i\n", pid);
     printf("\n");
 

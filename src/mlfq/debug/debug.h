@@ -9,9 +9,11 @@
 #define DEBUG_MODE 1
 
 // Funciones
-void dprint2(char **input);
-void dprint1(char *input);
-void dprint3(char *input);
-void dprint_int(int input);
-void dprint_float(float input);
-void dprint_pid(pid_t pid);
+void dprint_txt();
+
+void dprint_char_xx(char **input);
+void dprint_char_x(char *input);
+void dprint_txt_char_xx(char **input);
+void dprint_txt_char_x(char *input);
+
+
