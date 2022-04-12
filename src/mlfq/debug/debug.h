@@ -14,11 +14,16 @@ void dprint_txt();
 
 void dprint_str();
 void dprint_txt_str();
+void dprint_txt_str2();
 
 void dprint_char_xx(char **input);
 void dprint_char_x(char *input);
 void dprint_txt_char_xx(char **input);
 void dprint_txt_char_x(char *input);
+void dprint_char_xx2(char **input);
+void dprint_char_x2(char *input);
+void dprint_txt_char_xx2(char **input);
+void dprint_txt_char_x2(char *input);
 
 void dprint_pid(pid_t process_id);
 void dprint_txt_pid(pid_t process_id);
