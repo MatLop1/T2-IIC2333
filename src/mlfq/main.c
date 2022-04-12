@@ -17,19 +17,37 @@
 //Para poder hacer fork
 #include <unistd.h>
 
-// Traigo módulos que venían
-#include "../process/process.h"
-#include "../queue/queue.h"
-#include "../file_manager/manager.h"
-
 //Módulos de la tarea pasada
 // Para debuguear
 #include "debug/debug.h"
 
 // Módulos de esta tarea
 #include "../black_box/scheduler.h"
+#include "../process/process.h"
 #include "../queue/queue.h"
-#include "../queue/queue.h"
+#include "../file_manager/manager.h"
+
+void free_up_queue(Queue* queue) {
+  int queue_size = queue->size;  // FIXME!!!
+
+  for (int i = 0; i < queue_size; ++i) {
+    just_wait();
+    dprint_txt_char_x2("Sacando de la cola un proceso");
+    Process* process = dequeue_normal(queue);
+    dprint_txt_char_x2("Salió de la cola!!");
+
+    if(process){
+      char* name2 = process->name;
+      dprint_txt(); dprint_char_x("Proceso: "); dprint_char_x2(name2); dprint_line();
+
+      dprint_txt_char_x2("Lierando MEM");
+      free(process);
+      dprint_txt_char_x2("Liberada!!"); dprint_line();
+    }
+  }
+
+  free(queue);
+}
 
 
 int main(int argc, char const *argv[]) {
@@ -85,7 +103,7 @@ int main(int argc, char const *argv[]) {
 
     //Instancio un proceso
     just_wait_longer();
-    dprint_txt_char_x2("Voy a crear un proceso");
+    dprint_txt_char_x2("Vnot_started_yetoy a crear un proceso");
     Process* process = createProcess(name, pid, t_start, n_cycles, wait_cycles, wait_delay, s);
     dprint_txt_char_x2("Proceso creado!!");
 
@@ -125,30 +143,19 @@ int main(int argc, char const *argv[]) {
     queue_p2_size = queue_p2->size;  // FIXME!!!
     queue_p1_size = queue_p1->size;  // FIXME!!!
     queue_p0_size = queue_p0->size;  // FIXME!!!
+    break;
   }
 
-  for (int i = 0; i < not_started_yet_size; ++i) {
-    just_wait_longer();
-    dprint_txt_char_x2("Sacando de la cola un proceso");
-    Process* process = dequeue_normal(not_started_yet);
-    dprint_txt_char_x2("Salió de la cola!!");
+  // OPTIMIZE: No debería tener que limpiar todas las colas, pero mejor estar
+  //  seguros.
 
-    if(process){
-      char* name2 = process->name;
-      dprint_txt(); dprint_char_x("Proceso: "); dprint_char_x2(name2); dprint_line();
 
-      dprint_txt_char_x2("Lierando MEM");
-      free(process);
-      dprint_txt_char_x2("Liberada!!"); dprint_line();
-    }
-  }
-
-  free(not_started_yet);
-  free(running_queue);
-  free(finished_queue);
-  free(queue_p2);
-  free(queue_p1);
-  free(queue_p0);
+  free_up_queue(not_started_yet);
+  free_up_queue(running_queue);
+  free_up_queue(finished_queue);
+  free_up_queue(queue_p2);
+  free_up_queue(queue_p1);
+  free_up_queue(queue_p0);
 
   input_file_destroy(input_file);
 }

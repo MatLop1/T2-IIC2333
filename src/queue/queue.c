@@ -61,7 +61,9 @@ Process* dequeue_normal(Queue* queue) {
   
   if (tmp1) {
     queue->front = tmp1->next;
-    
+    queue->size = queue->size - 1;
+    dprint_line(); dprint_txt(); dprint_char_x("Largo de cola: "); dprint_int(queue->size); dprint_line(); dprint_line();
+
   } else {
     dprint_line(); dprint_txt_char_x("Cola se quedó vacia"); dprint_line();
   }
