@@ -21,7 +21,9 @@ Queue* createQueue();
 void enqueue(Queue* queue,
              Process* process);
 
-Process* dequeue(Queue* queue);
+Process* dequeue_sfj(Queue* queue);
+Process* dequeue_fifo(Queue* queue);
+Process* dequeue_normal(Queue* queue);
 
 void wait_tick_queue(Queue* queue);
 

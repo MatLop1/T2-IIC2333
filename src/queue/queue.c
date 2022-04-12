@@ -37,9 +37,13 @@ void enqueue(Queue* queue, Process* process) {
 
 // Saca de la cola un proceso que cumple con FIFO
 Process* dequeue_fifo(Queue* queue) {
+  dprint_txt_char_x("Entro a la función");
+  
+  dprint_txt_char_x("tmp# = queue[0]");
   Process* tmp1 = queue->front;
   Process* tmp2 = queue->front;
-
+  
+  dprint_txt_char_x("Mientras que...");
   while (tmp2 && tmp2->state==2) {
     if (tmp1->pid == tmp2->pid) {
       tmp2 = tmp2->next;
@@ -56,6 +60,26 @@ Process* dequeue_fifo(Queue* queue) {
   }
 
   return tmp2;
+}
+
+
+Process* dequeue_normal(Queue* queue) {
+  dprint_txt_char_x("Entro a dequeue normal");
+  
+  dprint_txt_char_x("tmp1 = queue[0]");
+  Process* tmp1 = queue->front;
+  
+  dprint_txt_char_x("Si tmp1 no es NULL");
+  if (tmp1 != NULL) {
+    dprint_txt_char_x("Retorno el 1er nodo");
+    queue->front = tmp1->next;
+    
+  } else {
+    dprint_txt_char_x("Retorno NULL");
+  }
+  
+  return tmp1;
+  
 }
 
 // Saca de la cola un proceso que cumple con SFJ, si hay varios es en FIFO

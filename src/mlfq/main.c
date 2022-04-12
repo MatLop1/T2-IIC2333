@@ -60,7 +60,7 @@ int main(int argc, char const *argv[]) {
 			printf("F%iC%i: %s ", i + 1, j + 1,input_file->lines[i][j]);
 		}
 
-    char *name = input_file->lines[i][0];
+    char *name = (char*)input_file->lines[i][0];
     int pid = atoi(input_file->lines[i][1]);
     int t_start = atoi(input_file->lines[i][2]);
     int n_cycles = atoi(input_file->lines[i][3]);
@@ -85,11 +85,21 @@ int main(int argc, char const *argv[]) {
     dprint_line(); dprint_char_x("\nMetiendo a la cola"); dprint_line();
     enqueue(not_started_yet, process);
     dprint_char_x("\nEstá en la cola"); dprint_line();
-
 		printf("\n");
 	}
 
-	input_file_destroy(input_file);
+  for (int i = 0; i < input_file->len; ++i) {
+    dprint_txt(); dprint_char_x("Sacando de la cola un proceso"); dprint_line();
+    Process* process = dequeue_normal(not_started_yet);
+
+    char name2 = process->name;
+    dprint_txt(); dprint_char_x("Proceso:"); dprint_char_x(name2); dprint_line();
+
+    dprint_txt(); dprint_char_x("Lierando MEM"); dprint_line();
+    free(process);
+  }
+
+
 
   free(not_started_yet);
   free(running_queue);
@@ -97,5 +107,7 @@ int main(int argc, char const *argv[]) {
   free(queue_p2);
   free(queue_p1);
   free(queue_p0);
+
+  input_file_destroy(input_file);
 
 }
