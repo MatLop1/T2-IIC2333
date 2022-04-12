@@ -16,10 +16,8 @@ void enqueue(Queue* queue, Process* process);
 
 Process* dequeue(Queue* queue);
 
-Queue* wait_tick_queue(Queue* queue);
-
-Queue* extract_queue_reset(Queue* queue);
+void wait_tick_queue(Queue* queue);
 
 void join_queue_reset(Queue* queue1, Queue* queue2);
 
-void kill_queue(Queue* queue);
+void join_queue_start(Queue* queue1, Queue* queue2);

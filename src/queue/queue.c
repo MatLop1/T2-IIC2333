@@ -75,13 +75,12 @@ Process* dequeue_sfj(Queue* queue) {
 }
 
 // genera un tick a todos los elementos de la cola
-Queue* wait_tick_queue(Queue* queue) {
+void wait_tick_queue(Queue* queue) {
     Process* process = queue->front;
     while(process){
         proc_tick(process);
         process = process->next;
     }
-    return queue;
 }
 
 // ingresa todos los procesos que ya completaron su tiempo de envejecimiento en la cola N°2 o N°3 (queue2) a la cola N°1 (queue1)
