@@ -112,7 +112,7 @@ void dprint_txt_int(int input) {
 }
 
 // Printea "input"
-void dprint_float(float input) {
+void dprint_txt_float(float input) {
   if (DEBUG_MODE) {
     char *start_color = "\033[38;3;1m";
     char *end_color = "\033[0m";

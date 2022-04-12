@@ -16,4 +16,11 @@ void dprint_char_x(char *input);
 void dprint_txt_char_xx(char **input);
 void dprint_txt_char_x(char *input);
 
+void dprint_pid(pid_t process_id);
+void dprint_txt_pid(pid_t process_id);
 
+void dprint_int(int input);
+void dprint_txt_int(int input);
+
+void dprint_txt_float(float input);
+void dprint_txt_float(float input);
