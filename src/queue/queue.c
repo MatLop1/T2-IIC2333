@@ -13,6 +13,7 @@ Queue* createQueue() {
     return queue;
 }
 
+// Agrega un elemento a la cola
 void enqueue(Queue* queue, Process* process) {
     Process* tmp = process;
     if (!queue->front) {
@@ -27,6 +28,7 @@ void enqueue(Queue* queue, Process* process) {
     queue->size++;
 }
 
+// Saca de la cola un proceso que cumple con FIFO
 Process* dequeue_fifo(Queue* queue) {
     Process* tmp1 = queue->front;
     Process* tmp2 = queue->front;
@@ -49,6 +51,7 @@ Process* dequeue_fifo(Queue* queue) {
     return tmp2;
 }
 
+// Saca de la cola un proceso que cumple con SFJ, si hay varios es en FIFO
 Process* dequeue_sfj(Queue* queue) {
     Process* sfj = queue->front;
     
@@ -82,16 +85,28 @@ Process* dequeue_sfj(Queue* queue) {
     return sfj;
 }
 
-Queue* wait_tick_queue(Queue* queue) {
+// genera un tick a todos los elementos de la cola
+void wait_tick_queue(Queue* queue) {
     Process* process = queue->front;
     while(process){
         proc_tick(process);
         process = process->next;
     }
-    return queue;
+
+    return;
 }
 
-// ingresa todos los procesos que ya completaron su tiempo de envejecimiento (queue2) a la cola N°1 (queue1)
+// Une queue2 al final de la queue1
+void join_queue(Queue* queue1, Queue* queue2){
+    if(queue1->rear){
+        queue1->rear->next = queue2->front;
+    } else {
+        queue1->front = queue2->front;
+        queue1->rear = queue2->rear;
+    }
+}
+
+// ingresa todos los procesos que ya completaron su tiempo de envejecimiento en la cola N°2 o N°3 (queue2) a la cola N°1 (queue1)
 void join_queue_reset(Queue* queue1, Queue* queue2){
     Queue* new_queue = createQueue();
     Process* tmp1 = queue2->front;
@@ -120,17 +135,11 @@ void join_queue_reset(Queue* queue1, Queue* queue2){
         }
     }
 
-    if(queue1->rear){
-        queue1->rear->next = new_queue->front;
-    } else {
-        queue1->front = new_queue->front;
-        queue1->rear = new_queue->rear;
-    }
-
+    join_queue(queue1, new_queue);
     free(new_queue);
 }
 
-// ingresa todos los procesos que ya completaron su tiempo para iniciar (queue2) a la cola N°1 (queue1)
+// ingresa todos los procesos que ya completaron su tiempo para iniciar en la cola AUX (queue2) a la cola N°1 (queue1)
 void join_queue_start(Queue* queue1, Queue* queue2){
     Queue* new_queue = createQueue();
     Process* tmp1 = queue2->front;
@@ -157,12 +166,6 @@ void join_queue_start(Queue* queue1, Queue* queue2){
         }
     }
 
-    if(queue1->rear){
-        queue1->rear->next = new_queue->front;
-    } else {
-        queue1->front = new_queue->front;
-        queue1->rear = new_queue->rear;
-    }
-
+    join_queue(queue1, new_queue);
     free(new_queue);
 }
