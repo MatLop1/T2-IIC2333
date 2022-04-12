@@ -83,6 +83,15 @@ void wait_tick_queue(Queue* queue) {
     }
 }
 
+void join_queue(Queue* queue1, Queue* queue2){
+    if(queue1->rear){
+        queue1->rear->next = queue2->front;
+    } else {
+        queue1->front = queue2->front;
+        queue1->rear = queue2->rear;
+    }
+}
+
 // ingresa todos los procesos que ya completaron su tiempo de envejecimiento en la cola N°2 o N°3 (queue2) a la cola N°1 (queue1)
 void join_queue_reset(Queue* queue1, Queue* queue2){
     Queue* new_queue = createQueue();
@@ -112,13 +121,7 @@ void join_queue_reset(Queue* queue1, Queue* queue2){
         }
     }
 
-    if(queue1->rear){
-        queue1->rear->next = new_queue->front;
-    } else {
-        queue1->front = new_queue->front;
-        queue1->rear = new_queue->rear;
-    }
-
+    join_queue(queue1, new_queue);
     free(new_queue);
 }
 
@@ -149,12 +152,6 @@ void join_queue_start(Queue* queue1, Queue* queue2){
         }
     }
 
-    if(queue1->rear){
-        queue1->rear->next = new_queue->front;
-    } else {
-        queue1->front = new_queue->front;
-        queue1->rear = new_queue->rear;
-    }
-
+    join_queue(queue1, new_queue);
     free(new_queue);
 }
