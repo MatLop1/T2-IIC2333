@@ -79,7 +79,7 @@ Process* set_priority(Process* process, int priority) {
 
 Process* start_first_time(Process* process) {
   process->state = 1;
-  return set_priority(process, 2);;
+  return set_priority(process, 2);
 }
 
 Process* sigcont(Process* process) {

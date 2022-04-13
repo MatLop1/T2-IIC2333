@@ -12,11 +12,17 @@
 
 // Funciones
 int tick(const int* q,
-          Queue* not_started_yet,
-          Queue* running_queue,
-          Queue* finished_queue,
-          Queue* queue_p2,
-          Queue* queue_p1,
-          Queue* queue_p0);
+         Queue* not_started_yet,
+         Queue* running_queue,
+         Queue* finished_queue,
+         Queue* queue_p2,
+         Queue* queue_p1,
+         Queue* queue_p0);
 
+void make_tick_happen(Queue* not_started_yet,
+                      Queue* running_queue,
+                      Queue* finished_queue,
+                      Queue* queue_p2,
+                      Queue* queue_p1,
+                      Queue* queue_p0);
 

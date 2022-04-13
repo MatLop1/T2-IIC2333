@@ -149,7 +149,6 @@ int main(int argc, char const *argv[]) {
     queue_p2_size = queue_p2->size;  // FIXME!!!
     queue_p1_size = queue_p1->size;  // FIXME!!!
     queue_p0_size = queue_p0->size;  // FIXME!!!
-    //break;
   }
 
   // TODO: Guardar en un archivo los resultados
