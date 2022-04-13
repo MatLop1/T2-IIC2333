@@ -22,10 +22,10 @@
 #include "debug/debug.h"
 
 // Módulos de esta tarea
-#include "../black_box/scheduler.h"
 #include "../process/process.h"
 #include "../queue/queue.h"
 #include "../file_manager/manager.h"
+#include "../black_box/scheduler.h"
 
 void free_up_queue(Queue* queue) {
   int queue_size = queue->size;  // FIXME!!!
@@ -120,6 +120,8 @@ int main(int argc, char const *argv[]) {
     dprint_txt(); dprint_char_x("Largo de cola: "); dprint_int(not_started_yet_size); dprint_line(); dprint_line();
 	}
 
+  int tick_count;
+
   // Main loop
   while (not_started_yet_size +
          running_queue_size +
@@ -136,9 +138,9 @@ int main(int argc, char const *argv[]) {
     dprint_line(); dprint_txt_char_x("     - - - - - - - ");
 
     just_wait();
-    dprint_line(); dprint_txt_char_x("- TICK -");dprint_line();
+    dprint_line(); dprint_txt_char_x("- TICK -"); dprint_line();
     wait_just_a_bit();
-    tick(q_value, not_started_yet, running_queue, finished_queue, queue_p2, queue_p1, queue_p0);
+    tick_count = do_tick(q_value, not_started_yet, running_queue, finished_queue, queue_p2, queue_p1, queue_p0);
 
     not_started_yet_size = not_started_yet->size;  // FIXME!!!
     running_queue_size = running_queue->size;  // FIXME!!!

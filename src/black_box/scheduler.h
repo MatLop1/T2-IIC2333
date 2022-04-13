@@ -11,19 +11,7 @@
 #include "../process/process.h"
 
 // Funciones
-int get_queue_quantum(int q_value, int priority);
-void make_tick_happen(
-    Queue* not_started_yet, Queue* running_queue, Queue* finished_queue,
-    Queue* queue_p2, Queue* queue_p1, Queue* queue_p0);
-void run_fifo(
-    int q, int priority,
-    Queue* not_started_yet, Queue* running_queue, Queue* finished_queue,
-    Queue* queue_p2, Queue* queue_p1, Queue* queue_p0);
-void run_sjf(
-    int q, int priority,
-    Queue* not_started_yet, Queue* running_queue, Queue* finished_queue,
-    Queue* queue_p2, Queue* queue_p1, Queue* queue_p0);
-int tick(int* q,
+int do_tick(const int* q,
           Queue* not_started_yet,
           Queue* running_queue,
           Queue* finished_queue,
