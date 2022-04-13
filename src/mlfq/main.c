@@ -140,7 +140,9 @@ int main(int argc, char const *argv[]) {
     just_wait();
     dprint_line(); dprint_txt_char_x("- TICK -"); dprint_line();
     wait_just_a_bit();
+
     tick_count = do_tick(q_value, not_started_yet, running_queue, finished_queue, queue_p2, queue_p1, queue_p0);
+    dprint_txt(); dprint_char_x("Ciclo actual: "); dprint_int(tick_count); dprint_line();
 
     not_started_yet_size = not_started_yet->size;  // FIXME!!!
     running_queue_size = running_queue->size;  // FIXME!!!
