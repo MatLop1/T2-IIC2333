@@ -105,8 +105,6 @@ int tick(const int* q,
 
 
 
-
-
     return tick_count;
 
 
