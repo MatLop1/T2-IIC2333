@@ -11,7 +11,7 @@
 #include "../process/process.h"
 
 // Funciones
-int do_tick(const int* q,
+int tick(const int* q,
           Queue* not_started_yet,
           Queue* running_queue,
           Queue* finished_queue,
