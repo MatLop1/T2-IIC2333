@@ -26,13 +26,11 @@ int tick_count = 0;
 
 void make_tick_happen(Queue* not_started_yet,
                       Queue* running_queue,
-                      Queue* finished_queue,
                       Queue* queue_p2,
                       Queue* queue_p1,
                       Queue* queue_p0) {
   wait_tick_queue(not_started_yet);
   wait_tick_queue(running_queue);
-  wait_tick_queue(finished_queue);
   wait_tick_queue(queue_p2);
   wait_tick_queue(queue_p1);
   wait_tick_queue(queue_p0);
@@ -49,7 +47,7 @@ int tick(const int* q,
          Queue* queue_p2,
          Queue* queue_p1,
          Queue* queue_p0) {
-  // - Sumo uno a la cuenta de ticks
+  // 01- Sumo uno a la cuenta de ticks
   dprint_txt_char_x("Nuevo tick");
   tick_count ++;
 
@@ -76,26 +74,31 @@ int tick(const int* q,
     }
   }
 
+  Process* current_proc;
+
   // 05- Reviso si hay algún proceso en "corriendo"
   if ( running_queue->size ) {
-    Process* current_proc = dequeue_normal(running_queue);
-  } else {}
+    current_proc = dequeue_normal(running_queue);
+  } else if ( queue_p2->size ) {
+    // 07- Si no hay proceso corriendo reviso la cola P2
+    current_proc = dequeue_normal(queue_p2);
+  } else if ( queue_p1->size ) {
+    current_proc = dequeue_normal(queue_p1);
+  } else {
+    current_proc = dequeue_normal(queue_p0);
+  }
 
+  // 06- Hago pasar un ciclo.
   proc_tick(current_proc);
   make_tick_happen(not_started_yet,
                    running_queue,
-                   finished_queue,
                    queue_p2,
                    queue_p1,
                    queue_p0);
 
 
-    // 03- Saco a los que entran
 
-    // 04- Los pongo en la cola de esperando
 
-    // 06- Si hay algún proceso corriendo, lo hago correr.
-    // 07- Si no hay proceso corriendo reviso la cola P2
     // 08- Si no hay ninguno corriendo en P2, reviso en la cola P1
     // 09- Si no hay ninguno corriendo en P1, reviso en la cola P0
 
