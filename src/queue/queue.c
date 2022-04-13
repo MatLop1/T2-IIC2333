@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "queue.h"
 
-Queue* createQueue() {
+Queue* create_queue() {
   Queue* queue = malloc(sizeof(Queue));
   queue->size = 0;
   queue->front = NULL;
@@ -61,11 +61,7 @@ Process* dequeue_normal(Queue* queue) {
   
   if (tmp1) {
     queue->front = tmp1->next;
-    queue->size = queue->size - 1;
-    dprint_line(); dprint_txt(); dprint_char_x("Largo de cola: "); dprint_int(queue->size); dprint_line(); dprint_line();
-
-  } else {
-    dprint_line(); dprint_txt_char_x("Cola se quedó vacia"); dprint_line();
+    queue->size--;
   }
   
   return tmp1; 
@@ -120,7 +116,9 @@ void wait_tick_queue(Queue* queue) {
 void join_queue(Queue* queue1, Queue* queue2){
   if(queue1->rear){
     queue1->rear->next = queue2->front;
+    queue1->size = queue1->size + queue2->size;
   } else {
+    queue1->size = queue1->size + queue2->size;
     queue1->front = queue2->front;
     queue1->rear = queue2->rear;
   }
@@ -139,6 +137,7 @@ void join_queue_reset(Queue* queue1, Queue* queue2){
         queue2->front = queue2->front->next;
         tmp1 = queue2->front;
         tmp2 = queue2->front;
+        queue2->size--;
       } else {
         tmp2 = tmp2->next;
       }
@@ -148,6 +147,7 @@ void join_queue_reset(Queue* queue1, Queue* queue2){
         enqueue(new_queue, tmp2);
         tmp1->next = tmp2->next;
         tmp2 = tmp2->next;
+        queue2->size--;
       } else {
         tmp1 = tmp1->next;
         tmp2 = tmp2->next;
@@ -171,6 +171,7 @@ void join_queue_start(Queue* queue1, Queue* queue2){
         queue2->front = queue2->front->next;
         tmp1 = queue2->front;
         tmp2 = queue2->front;
+        queue2->size--;
       } else {
         tmp2 = tmp2->next;
       }
@@ -179,6 +180,7 @@ void join_queue_start(Queue* queue1, Queue* queue2){
         enqueue(new_queue, tmp2);
         tmp1->next = tmp2->next;
         tmp2 = tmp2->next;
+        queue2->size--;
       } else {
         tmp1 = tmp1->next;
         tmp2 = tmp2->next;

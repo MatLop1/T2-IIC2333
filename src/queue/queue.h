@@ -13,7 +13,7 @@ typedef struct queue Queue;
 struct queue {
     Process* front;
     Process* rear;
-    int* size;
+    int size;
     };
 
 Queue* createQueue();
